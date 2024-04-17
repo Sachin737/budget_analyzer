@@ -1,0 +1,25 @@
+{
+  "name": "budget_analyser",
+  "version": "1.0.0",
+  "description": "first commit",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "unknownBatchelor\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[\u001b[\u001b[C\u001b[C\u001b[C\u001b[bachelor\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[DunknownBachelor",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sachin737/budget_analyzer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Sachin737/budget_analyzer/issues"
+  },
+  "homepage": "https://github.com/Sachin737/budget_analyzer#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.3.2",
+    "morgan": "^1.10.0"
+  }
+}
