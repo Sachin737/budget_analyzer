@@ -1,6 +1,11 @@
 const express = require('express');
+const morgan = require('morgan'); // logs the requests
 
 const app = express();
+
+if (process.env.NODE_ENV === 'development') {
+    app.use(morgan('dev'));
+}
 
 app.get('/', (req, res) => {
     res.status(200).json({
@@ -9,7 +14,4 @@ app.get('/', (req, res) => {
     });
 });
 
-const port = 3000;
-app.listen(port, () => {
-    console.log(`App running on port ${port}...`);
-});
+module.exports = app;

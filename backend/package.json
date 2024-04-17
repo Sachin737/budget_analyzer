@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/Sachin737/budget_analyzer#readme",
   "dependencies": {
-    "express": "^4.19.2"
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.3.2",
+    "morgan": "^1.10.0"
   }
 }
