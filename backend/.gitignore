@@ -1,7 +1,7 @@
 node_modules/
 config.env
 dev-data/
-controllers/
+controllers/summaryController.js
+controllers/errorController.js
 public/
-routes/
-utils/
+routes/summaryRoutes.js
