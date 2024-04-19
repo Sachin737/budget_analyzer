@@ -1,7 +1,6 @@
 node_modules/
 config.env
 dev-data/prompts.txt
-dev-data/import-dev-data.js
 controllers/summaryController.js
 controllers/errorController.js
 public/
