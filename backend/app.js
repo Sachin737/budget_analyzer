@@ -31,7 +31,10 @@ app.use('/api/v1/expenses', expenseRouter);
 
 // UNHANDLED ROUTES
 app.all('*', (req, res, next) => {
-    console.log("Can't find on this server!");
+    res.status(404).json({
+        status: 'error',
+        message: `Can't find ${req.originalUrl} on this server!`,
+    });
     next();
 });
 

@@ -13,13 +13,28 @@ const userSchema = new mongoose.Schema({
         lowercase: true,
         validate: [validator.isEmail, 'Please provide a valid email'],
     },
-    photo: String,
-    password: {
+    photo: {
         type: String,
-        required: [true, 'Please provide a password'],
-        minlength: 8,
-        // select: false, // this will make sure that password is not visible in output
+        default: 'default.jpg',
     },
+    salaryAfterTax: {
+        type: Number,
+        default: 0,
+    },
+    otherIncomes: {
+        type: Number,
+        default: 0,
+    },
+    pensionContributions: {
+        type: Number,
+        default: 0,
+    },
+    // password: {
+    //     type: String,
+    //     required: [true, 'Please provide a password'],
+    //     minlength: 8,
+    //     // select: false, // this will make sure that password is not visible in output
+    // },
     // passwordConfirm: {
     //     type: String,
     //     required: [true, 'Please confirm your password'],

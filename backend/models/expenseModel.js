@@ -18,6 +18,8 @@ const expenseSchema = new mongoose.Schema(
                     'vehicle',
                     'lifestyle',
                     'kid_s-study',
+                    'insurance-payments',
+                    'investment-outflows',
                 ],
                 message: 'type of expense is not defined!',
             },
@@ -28,12 +30,6 @@ const expenseSchema = new mongoose.Schema(
         },
         monthly: {
             type: Number,
-            default: 0,
-        },
-        incomeFraction: {
-            type: Number,
-            min: 0,
-            max: 100,
             default: 0,
         },
         user: {
