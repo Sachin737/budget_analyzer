@@ -1,0 +1,19 @@
+[
+    {"typeOfExpense": "family-direct", "item": "pocket-money", "monthly": 15000, "user": "66217b5dd1ae4f0693f1a4ff"},
+    {"typeOfExpense": "family-direct", "item": "towards-gifts", "monthly": 10000, "user": "66217b5dd1ae4f0693f1a4ff"},
+    {"typeOfExpense": "family-direct", "item": "medical-expenses", "monthly": 30000, "user": "66217b5dd1ae4f0693f1a4ff"},
+    {"typeOfExpense": "family-direct", "item": "donation-charity", "monthly": 20000, "user": "66217b5dd1ae4f0693f1a4ff"},
+    {"typeOfExpense": "family-direct", "item": "miscellaneous-expenses", "monthly": 22000, "user": "66217b5dd1ae4f0693f1a4ff"},
+    {"typeOfExpense": "family-direct", "item": "pocket-money", "monthly": 15550, "user": "66217b5dd1ae4f0693f1a503"},
+    {"typeOfExpense": "family-direct", "item": "towards-gifts", "monthly": 10530, "user": "66217b5dd1ae4f0693f1a503"},
+    {"typeOfExpense": "family-direct", "item": "medical-expenses", "monthly": 30380, "user": "66217b5dd1ae4f0693f1a503"},
+    {"typeOfExpense": "family-direct", "item": "donation-charity", "monthly": 20570, "user": "66217b5dd1ae4f0693f1a503"},
+    {"typeOfExpense": "family-direct", "item": "miscellaneous-expenses", "monthly": 22550, "user": "66217b5dd1ae4f0693f1a503"},
+    {"typeOfExpense": "family-direct", "item": "pocket-money", "monthly": 15200, "user": "66217b5dd1ae4f0693f1a504"},
+    {"typeOfExpense": "family-direct", "item": "towards-gifts", "monthly": 11000, "user": "66217b5dd1ae4f0693f1a504"},
+    {"typeOfExpense": "family-direct", "item": "medical-expenses", "monthly": 30000, "user": "66217b5dd1ae4f0693f1a504"},
+    {"typeOfExpense": "family-direct", "item": "donation-charity", "monthly": 20900, "user": "66217b5dd1ae4f0693f1a504"},
+    {"typeOfExpense": "family-direct", "item": "miscellaneous-expenses", "monthly": 22000, "user": "66217b5dd1ae4f0693f1a504"}
+]
+
+

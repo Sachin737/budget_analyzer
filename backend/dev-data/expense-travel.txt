@@ -1,0 +1,57 @@
+[
+    {
+        "typeOfExpense": "travel",
+        "item": "local-travel-auto",
+        "monthly": 9000,
+        "user": "66217b5dd1ae4f0693f1a4ff"
+    },
+    {
+        "typeOfExpense": "travel",
+        "item": "local-travel-bus",
+        "monthly": 8500,
+        "user": "66217b5dd1ae4f0693f1a4ff"
+    },
+    {
+        "typeOfExpense": "travel",
+        "item": "local-travel-taxi",
+        "monthly": 9000,
+        "user": "66217b5dd1ae4f0693f1a4ff"
+    },
+    {
+        "typeOfExpense": "travel",
+        "item": "local-travel-auto",
+        "monthly": 9552,
+        "user": "66217b5dd1ae4f0693f1a503"
+    },
+    {
+        "typeOfExpense": "travel",
+        "item": "local-travel-bus",
+        "monthly": 8193,
+        "user": "66217b5dd1ae4f0693f1a503"
+    },
+    {
+        "typeOfExpense": "travel",
+        "item": "local-travel-taxi",
+        "monthly": 9473,
+        "user": "66217b5dd1ae4f0693f1a503"
+    },
+    {
+        "typeOfExpense": "travel",
+        "item": "local-travel-auto",
+        "monthly": 9220,
+        "user": "66217b5dd1ae4f0693f1a504"
+    },
+    {
+        "typeOfExpense": "travel",
+        "item": "local-travel-bus",
+        "monthly": 7986,
+        "user": "66217b5dd1ae4f0693f1a504"
+    },
+    {
+        "typeOfExpense": "travel",
+        "item": "local-travel-taxi",
+        "monthly": 9295,
+        "user": "66217b5dd1ae4f0693f1a504"
+    }
+]
+

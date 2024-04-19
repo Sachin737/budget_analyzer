@@ -1,0 +1,79 @@
+[
+    {
+        "name": "Alice Johnson",
+        "email": "alice.johnson@example.com",
+        "salaryAfterTax": 95000,
+        "otherIncomes": 15000,
+        "pensionContributions": 9000
+    },
+    {
+        "name": "Bob Smith",
+        "email": "bob.smith@example.com",
+        "salaryAfterTax": 100000,
+        "otherIncomes": 20000,
+        "pensionContributions": 9500
+    },
+    {
+        "name": "Carol White",
+        "email": "carol.white@example.com",
+        "salaryAfterTax": 105000,
+        "otherIncomes": 30000,
+        "pensionContributions": 10000
+    },
+    {
+        "name": "David Lee",
+        "email": "david.lee@example.com",
+        "salaryAfterTax": 110000,
+        "otherIncomes": 40000,
+        "pensionContributions": 10500
+    },
+    {
+        "name": "Eva Black",
+        "email": "eva.black@example.com",
+        "salaryAfterTax": 115000,
+        "otherIncomes": 50000,
+        "pensionContributions": 11000
+    },
+    {
+        "name": "Frank Green",
+        "email": "frank.green@example.com",
+        "salaryAfterTax": 120000,
+        "otherIncomes": 60000,
+        "pensionContributions": 11500
+    },
+    {
+        "name": "Grace Hall",
+        "email": "grace.hall@example.com",
+        "salaryAfterTax": 125000,
+        "otherIncomes": 70000,
+        "pensionContributions": 12000
+    },
+    {
+        "name": "Henry Adams",
+        "email": "henry.adams@example.com",
+        "salaryAfterTax": 130000,
+        "otherIncomes": 80000,
+        "pensionContributions": 12500
+    },
+    {
+        "name": "Ivy Brown",
+        "email": "ivy.brown@example.com",
+        "salaryAfterTax": 135000,
+        "otherIncomes": 90000,
+        "pensionContributions": 13000
+    },
+    {
+        "name": "John Doe",
+        "email": "john.doe@example.com",
+        "salaryAfterTax": 140000,
+        "otherIncomes": 95000,
+        "pensionContributions": 13500
+    },
+    {
+        "name": "Kate Morris",
+        "email": "kate.morris@example.com",
+        "salaryAfterTax": 150000,
+        "otherIncomes": 100000,
+        "pensionContributions": 14000
+    }
+]

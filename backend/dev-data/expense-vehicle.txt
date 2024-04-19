@@ -1,0 +1,112 @@
+[
+    {
+        "typeOfExpense": "vehicle",
+        "item": "drivers-salary",
+        "monthly": 9000,
+        "user": "66217b5dd1ae4f0693f1a4ff"
+    },
+    {
+        "typeOfExpense": "vehicle",
+        "item": "fuel-charges",
+        "monthly": 8500,
+        "user": "66217b5dd1ae4f0693f1a4ff"
+    },
+    {
+        "typeOfExpense": "vehicle",
+        "item": "servicing-charges",
+        "monthly": 9000,
+        "user": "66217b5dd1ae4f0693f1a4ff"
+    },
+    {
+        "typeOfExpense": "vehicle",
+        "item": "car-enhancement",
+        "monthly": 9000,
+        "user": "66217b5dd1ae4f0693f1a4ff"
+    },
+    {
+        "typeOfExpense": "vehicle",
+        "item": "car-insurance",
+        "monthly": 8500,
+        "user": "66217b5dd1ae4f0693f1a4ff"
+    },
+    {
+        "typeOfExpense": "vehicle",
+        "item": "bike-insurance",
+        "monthly": 9000,
+        "user": "66217b5dd1ae4f0693f1a4ff"
+    },
+    {
+        "typeOfExpense": "vehicle",
+        "item": "drivers-salary",
+        "monthly": 8054,
+        "user": "66217b5dd1ae4f0693f1a503"
+    },
+    {
+        "typeOfExpense": "vehicle",
+        "item": "fuel-charges",
+        "monthly": 8493,
+        "user": "66217b5dd1ae4f0693f1a503"
+    },
+    {
+        "typeOfExpense": "vehicle",
+        "item": "servicing-charges",
+        "monthly": 9435,
+        "user": "66217b5dd1ae4f0693f1a503"
+    },
+    {
+        "typeOfExpense": "vehicle",
+        "item": "car-enhancement",
+        "monthly": 11319,
+        "user": "66217b5dd1ae4f0693f1a503"
+    },
+    {
+        "typeOfExpense": "vehicle",
+        "item": "car-insurance",
+        "monthly": 7406,
+        "user": "66217b5dd1ae4f0693f1a503"
+    },
+    {
+        "typeOfExpense": "vehicle",
+        "item": "bike-insurance",
+        "monthly": 11447,
+        "user": "66217b5dd1ae4f0693f1a503"
+    },
+    {
+        "typeOfExpense": "vehicle",
+        "item": "drivers-salary",
+        "monthly": 8834,
+        "user": "66217b5dd1ae4f0693f1a504"
+    },
+    {
+        "typeOfExpense": "vehicle",
+        "item": "fuel-charges",
+        "monthly": 9868,
+        "user": "66217b5dd1ae4f0693f1a504"
+    },
+    {
+        "typeOfExpense": "vehicle",
+        "item": "servicing-charges",
+        "monthly": 9791,
+        "user": "66217b5dd1ae4f0693f1a504"
+    },
+    {
+        "typeOfExpense": "vehicle",
+        "item": "car-enhancement",
+        "monthly": 11101,
+        "user": "66217b5dd1ae4f0693f1a504"
+    },
+    {
+        "typeOfExpense": "vehicle",
+        "item": "car-insurance",
+        "monthly": 8290,
+        "user": "66217b5dd1ae4f0693f1a504"
+    },
+    {
+        "typeOfExpense": "vehicle",
+        "item": "bike-insurance",
+        "monthly": 10875,
+        "user": "66217b5dd1ae4f0693f1a504"
+    }
+]
+
+

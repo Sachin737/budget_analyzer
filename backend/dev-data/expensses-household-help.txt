@@ -1,0 +1,15 @@
+[
+    {"typeOfExpense": "house-help", "item": "cleaner-cook", "monthly": 3200, "user": "66217b5dd1ae4f0693f1a504"},
+    {"typeOfExpense": "house-help", "item": "car-washing", "monthly": 3000, "user": "66217b5dd1ae4f0693f1a504"},
+    {"typeOfExpense": "house-help", "item": "childcare-nanny", "monthly": 4500, "user": "66217b5dd1ae4f0693f1a504"},
+    {"typeOfExpense": "house-help", "item": "adultcare-nurse", "monthly": 7000, "user": "66217b5dd1ae4f0693f1a504"},
+    {"typeOfExpense": "house-help", "item": "cleaner-cook", "monthly": 2900, "user": "66217b5dd1ae4f0693f1a503"},
+    {"typeOfExpense": "house-help", "item": "car-washing", "monthly": 3500, "user": "66217b5dd1ae4f0693f1a503"},
+    {"typeOfExpense": "house-help", "item": "childcare-nanny", "monthly": 4700, "user": "66217b5dd1ae4f0693f1a503"},
+    {"typeOfExpense": "house-help", "item": "adultcare-nurse", "monthly": 6100, "user": "66217b5dd1ae4f0693f1a503"},
+    {"typeOfExpense": "house-help", "item": "cleaner-cook", "monthly": 2943, "user": "66217b5dd1ae4f0693f1a4ff"},
+    {"typeOfExpense": "house-help", "item": "car-washing", "monthly": 3084, "user": "66217b5dd1ae4f0693f1a4ff"},
+    {"typeOfExpense": "house-help", "item": "childcare-nanny", "monthly": 4604, "user": "66217b5dd1ae4f0693f1a4ff"},
+    {"typeOfExpense": "house-help", "item": "adultcare-nurse", "monthly": 6506, "user": "66217b5dd1ae4f0693f1a4ff"}
+]
+
