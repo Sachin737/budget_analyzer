@@ -1,37 +1,90 @@
 const User = require('./../models/userModel');
+const AppError = require('../utils/appError');
 
-exports.createUser = (req, res) => {
-    res.status(500).json({
-        status: 'error',
-        message: 'This route is not yet defined!',
-    });
+exports.createUser = async (req, res, next) => {
+    try {
+        const user = await User.create(req.body);
+
+        res.status(201).json({
+            status: 'success',
+            data: {
+                data: user,
+            },
+        });
+    } catch (err) {
+        next(err);
+    }
 };
 
-exports.getUser = (req, res) => {
-    res.status(500).json({
-        status: 'error',
-        message: 'This route is not yet defined!',
-    });
+exports.getUser = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.params.id);
+        if (!user) {
+            return next(new AppError('No document found with that ID', 404));
+        }
+
+        res.status(200).json({
+            status: 'success',
+            data: {
+                data: user,
+            },
+        });
+    } catch (err) {
+        next(err);
+    }
 };
 
-exports.getAllUsers = (req, res) => {
-    res.status(500).json({
-        status: 'error',
-        message: 'This route is not yet defined!',
-    });
+exports.getAllUsers = async (req, res, next) => {
+    try {
+        const users = await User.find();
+        res.status(200).json({
+            status: 'success',
+            results: users.length,
+            data: {
+                users: users,
+            },
+        });
+    } catch (err) {
+        next(err);
+    }
 };
 
 // NOT for password updates
-exports.updateUser = (req, res) => {
-    res.status(500).json({
-        status: 'error',
-        message: 'This route is not yet defined!',
-    });
+exports.updateUser = async (req, res, next) => {
+    try {
+        const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+            runValidators: true,
+        });
+
+        if (!user) {
+            return next(new AppError('No document found with that ID', 404));
+        }
+
+        res.status(200).json({
+            status: 'success',
+            data: {
+                data: user,
+            },
+        });
+    } catch (err) {
+        next(err);
+    }
 };
 
-exports.deletUser = (req, res) => {
-    res.status(500).json({
-        status: 'error',
-        message: 'This route is not yet defined!',
-    });
+exports.deleteUser = async (req, res, next) => {
+    try {
+        const user = await User.findByIdAndDelete(req.params.id);
+
+        if (!user) {
+            return next(new AppError('No document found with that ID', 404));
+        }
+
+        res.status(204).json({
+            status: 'success',
+            data: null,
+        });
+    } catch (err) {
+        next(err);
+    }
 };
