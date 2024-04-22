@@ -8,7 +8,7 @@ exports.createUser = async (req, res, next) => {
         res.status(201).json({
             status: 'success',
             data: {
-                data: user,
+                user,
             },
         });
     } catch (err) {
@@ -18,7 +18,8 @@ exports.createUser = async (req, res, next) => {
 
 exports.getUser = async (req, res, next) => {
     try {
-        const user = await User.findById(req.params.id);
+        const user = await User.findById(req.params.id).populate('expenses');
+        console.log(req.params.id);
         if (!user) {
             return next(new AppError('No document found with that ID', 404));
         }
@@ -26,7 +27,7 @@ exports.getUser = async (req, res, next) => {
         res.status(200).json({
             status: 'success',
             data: {
-                data: user,
+                user,
             },
         });
     } catch (err) {
@@ -41,7 +42,7 @@ exports.getAllUsers = async (req, res, next) => {
             status: 'success',
             results: users.length,
             data: {
-                users: users,
+                users,
             },
         });
     } catch (err) {
@@ -64,7 +65,7 @@ exports.updateUser = async (req, res, next) => {
         res.status(200).json({
             status: 'success',
             data: {
-                data: user,
+                user,
             },
         });
     } catch (err) {
