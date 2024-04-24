@@ -1,4 +1,5 @@
 const Expense = require('./../models/expenseModel');
+const { userSummary } = require('./../controllers/userSummaryController');
 const AppError = require('../utils/appError');
 
 exports.getAllExpenseDetails = async (req, res, next) => {
@@ -16,13 +17,38 @@ exports.getAllExpenseDetails = async (req, res, next) => {
     }
 };
 
-exports.addExpenseDetail = async (req, res, next) => {
+exports.addOrUpdateExpenseDetail = async (req, res, next) => {
     try {
-        const expense = await Expense.create(req.body);
+        let expense = await Expense.findOneAndUpdate(
+            { user: req.body.user, item: req.body.item },
+            req.body
+        );
+        if (!expense) {
+            expense = await Expense.create(req.body);
+        }
+        // Update summary for the current user
+        req.params.user = req.body.user;
+        const summary = await userSummary(req, res, next);
 
         res.status(201).json({
             status: 'success',
-            data: expense
+            data: {
+                expense,
+            },
+        });
+    } catch (err) {
+        next(err);
+    }
+};
+
+exports.addExpenseDetail = async (req, res, next) => {
+    try {
+        const expense = await Expense.create(req.body);
+        res.status(201).json({
+            status: 'success',
+            data: {
+                expense,
+            },
         });
     } catch (err) {
         next(err);

@@ -1,42 +1,10 @@
 const Summary = require('./../models/summaryModel');
-const Expense = require('./../models/expenseModel');
+const { userSummary } = require('./../controllers/userSummaryController');
 const AppError = require('../utils/appError');
-
-function sumUserExpenseByType(expenses) {
-    return expenses.reduce((acc, curr) => {
-        if (curr.typeOfExpense === 'family-direct') {
-            acc[curr.item] = curr.monthly;
-            return acc;
-        }
-        if (!acc[curr.typeOfExpense]) {
-            acc[curr.typeOfExpense] = 0;
-        }
-
-        acc[curr.typeOfExpense] += curr.monthly;
-        return acc;
-    }, {});
-}
-
-function preprocessKeys(obj) {
-    const newObj = {};
-
-    for (const key in obj) {
-        const newKey = key == 'bill' ? 'subscription' : key.replace(/-/g, '_');
-
-        newObj[newKey] = obj[key];
-    }
-    return newObj;
-}
 
 exports.createUserSummary = async (req, res, next) => {
     try {
-        const expenses = await Expense.find({ user: req.params.user });
-        const groupedExpenses = preprocessKeys(sumUserExpenseByType(expenses));
-
-        const summary = await Summary.create({
-            ...groupedExpenses,
-            user: req.params.user,
-        });
+        const summary = await userSummary(req, res, next);
 
         res.status(200).json({
             status: 'success',

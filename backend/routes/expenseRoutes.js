@@ -6,7 +6,7 @@ const router = express.Router();
 router
     .route('/')
     .get(expenseController.getAllExpenseDetails)
-    .post(expenseController.addExpenseDetail);
+    .post(expenseController.addOrUpdateExpenseDetail);
 
 router
     .route('/:id')
