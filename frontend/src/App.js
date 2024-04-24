@@ -1,54 +1,93 @@
 import "./App.css";
-import DropdownWithAdd from "./components/dropdown";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+import MyExpenses from "./components/MyExpenses";
 
 function App() {
-  const [expenseOptions, setExpenseOptions] = useState([]);
-  const [myExpenses, setMyExpenses] = useState([]);
+  // all options
+  const [expenseTypes, setExpenseTypes] = useState([]);
+  const [categoryTypes, setCategoryTypes] = useState([]);
 
-  const [selectedExpense, setSelectedExpense] = useState([]);
-  const [selectedExpenseCategory, setSelectedExpenseCategory] = useState([]);
+  // list of all expenses (for user)
+  const [myAllExpenses, setMyAllExpenses] = useState([]);
+
+  // selected options in form
+  const [selectedExpense, setSelectedExpense] = useState("");
+  const [selectedExpenseCategory, setSelectedExpenseCategory] = useState("");
   const [selectedAmount, setSelectedAmount] = useState([]);
-  
+
+  // user data
   const [salary, setSalary] = useState(1200000);
   const [userId, setUserId] = useState("user123");
 
-  const handleAddExpenseOption = (expense) => {
-    setExpenseOptions([...expenseOptions, expense]);
+  const [expenseOptions, setExpenseOptions] = useState([]);
+
+  // const handleAddExpenseOption = (expense) => {
+  //   setExpenseOptions([...expenseOptions, expense]);
+  // };
+
+  // to Add new expense
+  const handleAddExpense = async (name, amount) => {
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_API}/api/v1/expenses`,
+      {
+        typeOfExpense: selectedExpenseCategory,
+        item: selectedExpense,
+        monthly: selectedAmount,
+        user: "66217b5dd1ae4f0693f1a500", // this user id will come from jwt user session!
+      }
+    );
+
+    // updating all expense state element
+    setMyAllExpenses([...myAllExpenses, data?.data]);
+
+    // console.log(data?.data);
   };
 
-  
+  // to get all options in add Expense form
+  const getAllInputOption = async () => {
+    try {
+      const { data } = await axios.get(
+        // calling admin user [as we just need input options name]
+        `${process.env.REACT_APP_API}/api/v1/users/66217b5dd1ae4f0693f1a503`
+      );
+      // console.log(data?.data?.user?.expenses);
 
-  const handleAddExpense = (name, amount) => {
-    const newExpense = { name, monthlyAmount: amount };
-    setMyExpenses([...myExpenses, newExpense]);
-    console.log(name,amount);
+      const temp = data?.data?.user?.expenses;
+      const arr = temp.map((el) => el.item);
+      const arr0 = [...new Set(temp.map((el) => el.typeOfExpense))];
+
+      // console.log(arr);
+      setCategoryTypes(arr0);
+      setExpenseTypes(arr);
+    } catch (err) {
+      console.log(err);
+    }
   };
-
-  const expenseTypes = [
-    { name: "Household expenses", monthlyAmount: 360 },
-    { name: "Other shoppings", monthlyAmount: 0 },
-    { name: "Household help", monthlyAmount: 0 },
-    { name: "Subscriptions", monthlyAmount: 0 },
-    { name: "Pocket money (all members)", monthlyAmount: 0 },
-    { name: "Expenses towards gifts", monthlyAmount: 0 },
-    { name: "Medical expenses", monthlyAmount: 0 },
-    { name: "Vacation expenses", monthlyAmount: 0 },
-    { name: "Travel", monthlyAmount: 0 },
-    { name: "Car & Petrol expenses", monthlyAmount: 0 },
-    { name: "Lifestyle expenses", monthlyAmount: 0 },
-    { name: "Donation/Charity", monthlyAmount: 0 },
-    { name: "School & College Expenses", monthlyAmount: 0 },
-    { name: "Miscellaneous expenses", monthlyAmount: 0 },
-    { name: "Insurance payments", monthlyAmount: 1200 },
-    { name: "Investments", monthlyAmount: 600 },
-  ];
 
   const totalMonthlyAmount = expenseOptions.reduce(
     (total, expense) => total + expense.monthlyAmount,
     0
   );
   const percentageOfSalary = (totalMonthlyAmount * 100) / salary;
+
+  useEffect(() => {
+    const intiateMyAllExpenses = async () => {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API}/api/v1/users/66217b5dd1ae4f0693f1a500`
+      );
+
+      setMyAllExpenses(data?.data?.user?.expenses);
+      console.log(data?.data?.user?.expenses);
+    };
+
+    intiateMyAllExpenses();
+  }, []);
+
+  useEffect(() => {
+    getAllInputOption();
+  }, []);
 
   return (
     <div className="container mx-auto min-h-screen bg-[#000] px-4 py-8 rounded-lg shadow-md">
@@ -65,7 +104,7 @@ function App() {
 
       {/* MAIN CONTENT */}
       <div className="mainContent pt-16 flex flex-col md:flex-row items-center justify-center">
-        <div className="expenseAdder bg-[#0F0F0F] rounded-lg p-4 shadow-md mr-0 md:mr-8 mb-4 md:mb-0 w-full md:w-[40%]">
+        <div className="expenseAdder bg-[#0F0F0F] rounded-lg p-4 shadow-md mb-4 w-full md:w-[40%] md:mr-8 md:mb-0 md:ml-8">
           <h2 className="text-xl font-semibold text-[#EEEEEE] mb-4">
             Add Expense
           </h2>
@@ -76,20 +115,34 @@ function App() {
             className="mb-4 mt-4 p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-400 block w-full"
           >
             <option value="">Category</option>
-            {expenseTypes.map((expense, index) => (
-              <option key={index} value={expense.name}>
-                {expense.name}
-              </option>
-            ))}
+            {categoryTypes &&
+              categoryTypes.map((category, index) => (
+                <option key={index} value={category}>
+                  {category}
+                </option>
+              ))}
           </select>
 
-          {/* Expense adder */}
-          <DropdownWithAdd selectedExpense={selectedExpense} setSelectedExpense={setSelectedExpense} onAddExpense={handleAddExpenseOption}/>
+          {/* Expense name */}
+          <select
+            value={selectedExpense}
+            onChange={(e) => setSelectedExpense(e.target.value)}
+            className="mb-4 mt-4 p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-400 block w-full"
+          >
+            <option value="">Expense</option>
+            {expenseTypes &&
+              expenseTypes.map((expense, index) => (
+                <option key={index} value={expense}>
+                  {expense}
+                </option>
+              ))}
+          </select>
+
           <input
             type="number"
             placeholder="Amount"
             className="mt-4 p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-400 block w-full"
-            onChange={(e)=>setSelectedAmount(e.target.value)}
+            onChange={(e) => setSelectedAmount(e.target.value)}
           />
           <button
             onClick={() => handleAddExpense(selectedExpense, selectedAmount)} // Example values, replace with actual data input
@@ -98,13 +151,15 @@ function App() {
             Add
           </button>
         </div>
-        <div className="summary bg-[#0F0F0F] rounded-lg p-4 shadow-md mt-4 md:mt-0 flex-grow w-full md:w-[60%]">
+
+        {/* Summary */}
+        <div className="summary bg-[#0F0F0F] rounded-lg p-4 shadow-md flex-grow w-full md:w-[60%] md:ml-8 md:mr-8">
           <h2 className="text-xl font-semibold text-[#EEEEEE] mb-4">Summary</h2>
-          {expenseTypes &&
-            expenseTypes.map((expense, index) => (
+          {/* {expenseOptions &&
+            expenseOptions.map((expense, index) => (
               <div key={index} className="flex justify-between mb-2">
                 <p className="text-sm font-medium text-[#EEEEEE] w-2/6">
-                  {expense.name}
+                  {expense}
                 </p>
                 <p className="text-sm text-[#F2F7A1] w-1/6">{`₹${expense.monthlyAmount.toLocaleString()}`}</p>
                 <p className="text-sm text-[#F2F7A1] w-1/6">{`₹${(
@@ -115,8 +170,8 @@ function App() {
                   salary
                 ).toFixed(2)}%`}</p>
               </div>
-            ))}
-          <div className="flex justify-between mt-4">
+            ))} */}
+          {/* <div className="flex justify-between mt-4">
             <p className="text-sm font-medium text-[#EEEEEE] w-2/6">Total</p>
             <p className="text-sm text-[#F2F7A1] w-1/6">{`₹${totalMonthlyAmount.toLocaleString()}`}</p>
             <p className="text-sm text-[#F2F7A1] w-1/6">{`₹${(
@@ -139,23 +194,15 @@ function App() {
             <p className="text-sm text-[#F2F7A1] w-1/6">{`${(
               100 - percentageOfSalary
             ).toFixed(2)}%`}</p>
-          </div>
+          </div> */}
         </div>
       </div>
-      <div className="AllExpenses bg-[#0F0F0F] p-4 shadow-md mt-8">
-        <h2 className="text-xl font-semibold text-[#EEEEEE] mb-4">
-          All Expenses
-        </h2>
-        {myExpenses &&
-          myExpenses.map((expense, index) => (
-            <div key={index} className="flex justify-between mb-2">
-              <p className="text-sm font-medium text-[#EEEEEE]">
-                {expense.name}
-              </p>
-              <p className="text-sm text-[#F2F7A1]">{`₹${expense.monthlyAmount.toLocaleString()}`}</p>
-            </div>
-          ))}
-      </div>
+
+      {/* MY ALL EXPENSE COMPONENT */}
+      <MyExpenses
+        myAllExpenses={myAllExpenses}
+        userSalary={salary}
+      ></MyExpenses>
     </div>
   );
 }
