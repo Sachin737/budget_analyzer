@@ -3,6 +3,8 @@ const summaryController = require('./../controllers/summaryController');
 
 const router = express.Router();
 
+router.route('/create/:user').get(summaryController.createUserSummary);
+
 router
     .route('/')
     .get(summaryController.getAllSummaryDetails)

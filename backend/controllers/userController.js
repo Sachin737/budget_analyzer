@@ -18,7 +18,9 @@ exports.createUser = async (req, res, next) => {
 
 exports.getUser = async (req, res, next) => {
     try {
-        const user = await User.findById(req.params.id).populate('expenses');
+        const user = await User.findById(req.params.id)
+            .populate('expenses')
+            .populate('summary');
         if (!user) {
             return next(new AppError('No document found with that ID', 404));
         }
