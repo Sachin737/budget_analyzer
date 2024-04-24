@@ -1,11 +1,17 @@
 const express = require('express');
 const morgan = require('morgan'); // logs the requests
+const cors = require('cors');
 
 const userRouter = require('./routes/userRoutes');
 const expenseRouter = require('./routes/expenseRoutes');
 const summaryRouter = require('./routes/summaryRoutes');
 
 const app = express();
+
+app.enable('trust proxy');
+
+app.use(cors());
+app.options('*', cors());
 
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
