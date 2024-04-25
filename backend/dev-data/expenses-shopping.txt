@@ -3,54 +3,54 @@
         "typeOfExpense": "shopping",
         "item": "toiletries",
         "monthly": 400,
-        "user": "66217b5dd1ae4f0693f1a504"
+        "user": "662a02d135e74805d6f7b113"
     },
     {
         "typeOfExpense": "shopping",
         "item": "electronic-goods",
         "monthly": 1200,
-        "user": "66217b5dd1ae4f0693f1a504"
+        "user": "662a02d135e74805d6f7b113"
     },
     {
         "typeOfExpense": "shopping",
         "item": "garments",
         "monthly": 2000,
-        "user": "66217b5dd1ae4f0693f1a504"
+        "user": "662a02d135e74805d6f7b113"
     },
     {
         "typeOfExpense": "shopping",
         "item": "toiletries",
         "monthly": 449,
-        "user": "66217b5dd1ae4f0693f1a4ff"
+        "user": "662a02d135e74805d6f7b119"
     },
     {
         "typeOfExpense": "shopping",
         "item": "electronic-goods",
         "monthly": 1303,
-        "user": "66217b5dd1ae4f0693f1a4ff"
+        "user": "662a02d135e74805d6f7b119"
     },
     {
         "typeOfExpense": "shopping",
         "item": "garments",
         "monthly": 2141,
-        "user": "66217b5dd1ae4f0693f1a4ff"
+        "user": "662a02d135e74805d6f7b119"
     },
     {
         "typeOfExpense": "shopping",
         "item": "toiletries",
         "monthly": 300,
-        "user": "66217b5dd1ae4f0693f1a503"
+        "user": "662a02d135e74805d6f7b117"
     },
     {
         "typeOfExpense": "shopping",
         "item": "electronic-goods",
         "monthly": 1400,
-        "user": "66217b5dd1ae4f0693f1a503"
+        "user": "662a02d135e74805d6f7b117"
     },
     {
         "typeOfExpense": "shopping",
         "item": "garments",
         "monthly": 2200,
-        "user": "66217b5dd1ae4f0693f1a503"
+        "user": "662a02d135e74805d6f7b117"
     }
 ]

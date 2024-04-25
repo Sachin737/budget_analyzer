@@ -55,7 +55,7 @@ const importData = async () => {
 
 const importExpenseData = async () => {
     try {
-        console.log(allExpenses[0]);
+        // console.log(allExpenses[0]);
         console.log(allExpenses.length);
         await Expense.create(allExpenses);
         console.log('Expense data loaded successfully!');

@@ -3,288 +3,288 @@
         "typeOfExpense": "lifestyle",
         "item": "dinning-out",
         "monthly": 8000,
-        "user": "66217b5dd1ae4f0693f1a4ff"
+        "user": "662a02d135e74805d6f7b119"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "movies",
         "monthly": 8500,
-        "user": "66217b5dd1ae4f0693f1a4ff"
+        "user": "662a02d135e74805d6f7b119"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "disco-pubs",
         "monthly": 9000,
-        "user": "66217b5dd1ae4f0693f1a4ff"
+        "user": "662a02d135e74805d6f7b119"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "magazines-books",
         "monthly": 8000,
-        "user": "66217b5dd1ae4f0693f1a4ff"
+        "user": "662a02d135e74805d6f7b119"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "cosmetics",
         "monthly": 8500,
-        "user": "66217b5dd1ae4f0693f1a4ff"
+        "user": "662a02d135e74805d6f7b119"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "party-dinner-at-home",
         "monthly": 9000,
-        "user": "66217b5dd1ae4f0693f1a4ff"
+        "user": "662a02d135e74805d6f7b119"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "party-in-a-restaurant",
         "monthly": 8500,
-        "user": "66217b5dd1ae4f0693f1a4ff"
+        "user": "662a02d135e74805d6f7b119"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "gym-membership",
         "monthly": 8000,
-        "user": "66217b5dd1ae4f0693f1a4ff"
+        "user": "662a02d135e74805d6f7b119"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "dietician-nutritionist",
         "monthly": 8500,
-        "user": "66217b5dd1ae4f0693f1a4ff"
+        "user": "662a02d135e74805d6f7b119"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "gymkhana-membership",
         "monthly": 9000,
-        "user": "66217b5dd1ae4f0693f1a4ff"
+        "user": "662a02d135e74805d6f7b119"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "salon",
         "monthly": 9000,
-        "user": "66217b5dd1ae4f0693f1a4ff"
+        "user": "662a02d135e74805d6f7b119"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "sports-utility",
         "monthly": 8500,
-        "user": "66217b5dd1ae4f0693f1a4ff"
+        "user": "662a02d135e74805d6f7b119"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "hobby-expenses",
         "monthly": 8000,
-        "user": "66217b5dd1ae4f0693f1a4ff"
+        "user": "662a02d135e74805d6f7b119"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "alcohol",
         "monthly": 9000,
-        "user": "66217b5dd1ae4f0693f1a4ff"
+        "user": "662a02d135e74805d6f7b119"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "cigarette",
         "monthly": 8500,
-        "user": "66217b5dd1ae4f0693f1a4ff"
+        "user": "662a02d135e74805d6f7b119"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "any-other-club-membership",
         "monthly": 8000,
-        "user": "66217b5dd1ae4f0693f1a4ff"
+        "user": "662a02d135e74805d6f7b119"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "dinning-out",
         "monthly": 9758,
-        "user": "66217b5dd1ae4f0693f1a503"
+        "user": "662a02d135e74805d6f7b117"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "movies",
         "monthly": 9980,
-        "user": "66217b5dd1ae4f0693f1a503"
+        "user": "662a02d135e74805d6f7b117"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "disco-pubs",
         "monthly": 10492,
-        "user": "66217b5dd1ae4f0693f1a503"
+        "user": "662a02d135e74805d6f7b117"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "magazines-books",
         "monthly": 7932,
-        "user": "66217b5dd1ae4f0693f1a503"
+        "user": "662a02d135e74805d6f7b117"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "cosmetics",
         "monthly": 9995,
-        "user": "66217b5dd1ae4f0693f1a503"
+        "user": "662a02d135e74805d6f7b117"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "party-dinner-at-home",
         "monthly": 9463,
-        "user": "66217b5dd1ae4f0693f1a503"
+        "user": "662a02d135e74805d6f7b117"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "party-in-a-restaurant",
         "monthly": 8603,
-        "user": "66217b5dd1ae4f0693f1a503"
+        "user": "662a02d135e74805d6f7b117"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "gym-membership",
         "monthly": 9043,
-        "user": "66217b5dd1ae4f0693f1a503"
+        "user": "662a02d135e74805d6f7b117"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "dietician-nutritionist",
         "monthly": 6797,
-        "user": "66217b5dd1ae4f0693f1a503"
+        "user": "662a02d135e74805d6f7b117"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "gymkhana-membership",
         "monthly": 10676,
-        "user": "66217b5dd1ae4f0693f1a503"
+        "user": "662a02d135e74805d6f7b117"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "salon",
         "monthly": 8082,
-        "user": "66217b5dd1ae4f0693f1a503"
+        "user": "662a02d135e74805d6f7b117"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "sports-utility",
         "monthly": 9167,
-        "user": "66217b5dd1ae4f0693f1a503"
+        "user": "662a02d135e74805d6f7b117"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "hobby-expenses",
         "monthly": 9191,
-        "user": "66217b5dd1ae4f0693f1a503"
+        "user": "662a02d135e74805d6f7b117"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "alcohol",
         "monthly": 10438,
-        "user": "66217b5dd1ae4f0693f1a503"
+        "user": "662a02d135e74805d6f7b117"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "cigarette",
         "monthly": 8500,
-        "user": "66217b5dd1ae4f0693f1a503"
+        "user": "662a02d135e74805d6f7b117"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "any-other-club-membership",
         "monthly": 8211,
-        "user": "66217b5dd1ae4f0693f1a503"
+        "user": "662a02d135e74805d6f7b117"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "dinning-out",
         "monthly": 10031,
-        "user": "66217b5dd1ae4f0693f1a504"
+        "user": "662a02d135e74805d6f7b113"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "movies",
         "monthly": 10436,
-        "user": "66217b5dd1ae4f0693f1a504"
+        "user": "662a02d135e74805d6f7b113"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "disco-pubs",
         "monthly": 10982,
-        "user": "66217b5dd1ae4f0693f1a504"
+        "user": "662a02d135e74805d6f7b113"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "magazines-books",
         "monthly": 8280,
-        "user": "66217b5dd1ae4f0693f1a504"
+        "user": "662a02d135e74805d6f7b113"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "cosmetics",
         "monthly": 10342,
-        "user": "66217b5dd1ae4f0693f1a504"
+        "user": "662a02d135e74805d6f7b113"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "party-dinner-at-home",
         "monthly": 9566,
-        "user": "66217b5dd1ae4f0693f1a504"
+        "user": "662a02d135e74805d6f7b113"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "party-in-a-restaurant",
         "monthly": 8985,
-        "user": "66217b5dd1ae4f0693f1a504"
+        "user": "662a02d135e74805d6f7b113"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "gym-membership",
         "monthly": 9461,
-        "user": "66217b5dd1ae4f0693f1a504"
+        "user": "662a02d135e74805d6f7b113"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "dietician-nutritionist",
         "monthly": 7378,
-        "user": "66217b5dd1ae4f0693f1a504"
+        "user": "662a02d135e74805d6f7b113"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "gymkhana-membership",
         "monthly": 11144,
-        "user": "66217b5dd1ae4f0693f1a504"
+        "user": "662a02d135e74805d6f7b113"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "salon",
         "monthly": 8640,
-        "user": "66217b5dd1ae4f0693f1a504"
+        "user": "662a02d135e74805d6f7b113"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "sports-utility",
         "monthly": 9723,
-        "user": "66217b5dd1ae4f0693f1a504"
+        "user": "662a02d135e74805d6f7b113"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "hobby-expenses",
         "monthly": 9510,
-        "user": "66217b5dd1ae4f0693f1a504"
+        "user": "662a02d135e74805d6f7b113"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "alcohol",
         "monthly": 10751,
-        "user": "66217b5dd1ae4f0693f1a504"
+        "user": "662a02d135e74805d6f7b113"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "cigarette",
         "monthly": 8845,
-        "user": "66217b5dd1ae4f0693f1a504"
+        "user": "662a02d135e74805d6f7b113"
     },
     {
         "typeOfExpense": "lifestyle",
         "item": "any-other-club-membership",
         "monthly": 8790,
-        "user": "66217b5dd1ae4f0693f1a504"
+        "user": "662a02d135e74805d6f7b113"
     }
 ]

@@ -3,37 +3,37 @@
         "typeOfExpense": "investment-outflows",
         "item": "mutual-funds",
         "monthly": 11500,
-        "user": "66217b5dd1ae4f0693f1a4ff"
+        "user": "662a02d135e74805d6f7b119"
     },
     {
         "typeOfExpense": "investment-outflows",
         "item": "equity",
         "monthly": 10200,
-        "user": "66217b5dd1ae4f0693f1a4ff"
+        "user": "662a02d135e74805d6f7b119"
     },
     {
         "typeOfExpense": "investment-outflows",
         "item": "mutual-funds",
         "monthly": 14700,
-        "user": "66217b5dd1ae4f0693f1a503"
+        "user": "662a02d135e74805d6f7b117"
     },
     {
         "typeOfExpense": "investment-outflows",
         "item": "equity",
         "monthly": 12800,
-        "user": "66217b5dd1ae4f0693f1a503"
+        "user": "662a02d135e74805d6f7b117"
     },
     {
         "typeOfExpense": "investment-outflows",
         "item": "mutual-funds",
         "monthly": 15200,
-        "user": "66217b5dd1ae4f0693f1a504"
+        "user": "662a02d135e74805d6f7b113"
     },
     {
         "typeOfExpense": "investment-outflows",
         "item": "equity",
         "monthly": 13000,
-        "user": "66217b5dd1ae4f0693f1a504"
+        "user": "662a02d135e74805d6f7b113"
     }
 ]
 

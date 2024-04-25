@@ -3,216 +3,216 @@
         "typeOfExpense": "bill",
         "item": "electricity",
         "monthly": 3000,
-        "user": "66217b5dd1ae4f0693f1a504"
+        "user": "662a02d135e74805d6f7b113"
     },
     {
         "typeOfExpense": "bill",
         "item": "telephone",
         "monthly": 2200,
-        "user": "66217b5dd1ae4f0693f1a504"
+        "user": "662a02d135e74805d6f7b113"
     },
     {
         "typeOfExpense": "bill",
         "item": "mobile",
         "monthly": 4000,
-        "user": "66217b5dd1ae4f0693f1a504"
+        "user": "662a02d135e74805d6f7b113"
     },
     {
         "typeOfExpense": "bill",
         "item": "internet",
         "monthly": 4500,
-        "user": "66217b5dd1ae4f0693f1a504"
+        "user": "662a02d135e74805d6f7b113"
     },
     {
         "typeOfExpense": "bill",
         "item": "cable-dish-tv",
         "monthly": 3000,
-        "user": "66217b5dd1ae4f0693f1a504"
+        "user": "662a02d135e74805d6f7b113"
     },
     {
         "typeOfExpense": "bill",
         "item": "netflix",
         "monthly": 4000,
-        "user": "66217b5dd1ae4f0693f1a504"
+        "user": "662a02d135e74805d6f7b113"
     },
     {
         "typeOfExpense": "bill",
         "item": "amazon-prime",
         "monthly": 2500,
-        "user": "66217b5dd1ae4f0693f1a504"
+        "user": "662a02d135e74805d6f7b113"
     },
     {
         "typeOfExpense": "bill",
         "item": "streaming-memberships",
         "monthly": 2200,
-        "user": "66217b5dd1ae4f0693f1a504"
+        "user": "662a02d135e74805d6f7b113"
     },
     {
         "typeOfExpense": "bill",
         "item": "newspapers",
         "monthly": 2300,
-        "user": "66217b5dd1ae4f0693f1a504"
+        "user": "662a02d135e74805d6f7b113"
     },
     {
         "typeOfExpense": "bill",
         "item": "society-membership",
         "monthly": 3200,
-        "user": "66217b5dd1ae4f0693f1a504"
+        "user": "662a02d135e74805d6f7b113"
     },
     {
         "typeOfExpense": "bill",
         "item": "house-rent",
         "monthly": 5000,
-        "user": "66217b5dd1ae4f0693f1a504"
+        "user": "662a02d135e74805d6f7b113"
     },
     {
         "typeOfExpense": "bill",
         "item": "repairs-maintenance",
         "monthly": 4300,
-        "user": "66217b5dd1ae4f0693f1a504"
+        "user": "662a02d135e74805d6f7b113"
     },
     {
         "typeOfExpense": "bill",
         "item": "electricity",
         "monthly": 3264,
-        "user": "66217b5dd1ae4f0693f1a4ff"
+        "user": "662a02d135e74805d6f7b119"
     },
     {
         "typeOfExpense": "bill",
         "item": "telephone",
         "monthly": 2619,
-        "user": "66217b5dd1ae4f0693f1a4ff"
+        "user": "662a02d135e74805d6f7b119"
     },
     {
         "typeOfExpense": "bill",
         "item": "mobile",
         "monthly": 4537,
-        "user": "66217b5dd1ae4f0693f1a4ff"
+        "user": "662a02d135e74805d6f7b119"
     },
     {
         "typeOfExpense": "bill",
         "item": "internet",
         "monthly": 4146,
-        "user": "66217b5dd1ae4f0693f1a4ff"
+        "user": "662a02d135e74805d6f7b119"
     },
     {
         "typeOfExpense": "bill",
         "item": "cable-dish-tv",
         "monthly": 2616,
-        "user": "66217b5dd1ae4f0693f1a4ff"
+        "user": "662a02d135e74805d6f7b119"
     },
     {
         "typeOfExpense": "bill",
         "item": "netflix",
         "monthly": 4255,
-        "user": "66217b5dd1ae4f0693f1a4ff"
+        "user": "662a02d135e74805d6f7b119"
     },
     {
         "typeOfExpense": "bill",
         "item": "amazon-prime",
         "monthly": 2251,
-        "user": "66217b5dd1ae4f0693f1a4ff"
+        "user": "662a02d135e74805d6f7b119"
     },
     {
         "typeOfExpense": "bill",
         "item": "streaming-memberships",
         "monthly": 2747,
-        "user": "66217b5dd1ae4f0693f1a4ff"
+        "user": "662a02d135e74805d6f7b119"
     },
     {
         "typeOfExpense": "bill",
         "item": "newspapers",
         "monthly": 2755,
-        "user": "66217b5dd1ae4f0693f1a4ff"
+        "user": "662a02d135e74805d6f7b119"
     },
     {
         "typeOfExpense": "bill",
         "item": "society-membership",
         "monthly": 3391,
-        "user": "66217b5dd1ae4f0693f1a4ff"
+        "user": "662a02d135e74805d6f7b119"
     },
     {
         "typeOfExpense": "bill",
         "item": "house-rent",
         "monthly": 5405,
-        "user": "66217b5dd1ae4f0693f1a4ff"
+        "user": "662a02d135e74805d6f7b119"
     },
     {
         "typeOfExpense": "bill",
         "item": "repairs-maintenance",
         "monthly": 4643,
-        "user": "66217b5dd1ae4f0693f1a4ff"
+        "user": "662a02d135e74805d6f7b119"
     },
     {
         "typeOfExpense": "bill",
         "item": "electricity",
         "monthly": 3664,
-        "user": "66217b5dd1ae4f0693f1a503"
+        "user": "662a02d135e74805d6f7b117"
     },
     {
         "typeOfExpense": "bill",
         "item": "telephone",
         "monthly": 2200,
-        "user": "66217b5dd1ae4f0693f1a503"
+        "user": "662a02d135e74805d6f7b117"
     },
     {
         "typeOfExpense": "bill",
         "item": "mobile",
         "monthly": 4840,
-        "user": "66217b5dd1ae4f0693f1a503"
+        "user": "662a02d135e74805d6f7b117"
     },
     {
         "typeOfExpense": "bill",
         "item": "internet",
         "monthly": 4607,
-        "user": "66217b5dd1ae4f0693f1a503"
+        "user": "662a02d135e74805d6f7b117"
     },
     {
         "typeOfExpense": "bill",
         "item": "cable-dish-tv",
         "monthly": 2500,
-        "user": "66217b5dd1ae4f0693f1a503"
+        "user": "662a02d135e74805d6f7b117"
     },
     {
         "typeOfExpense": "bill",
         "item": "netflix",
         "monthly": 3891,
-        "user": "66217b5dd1ae4f0693f1a503"
+        "user": "662a02d135e74805d6f7b117"
     },
     {
         "typeOfExpense": "bill",
         "item": "amazon-prime",
         "monthly": 1980,
-        "user": "66217b5dd1ae4f0693f1a503"
+        "user": "662a02d135e74805d6f7b117"
     },
     {
         "typeOfExpense": "bill",
         "item": "streaming-memberships",
         "monthly": 2382,
-        "user": "66217b5dd1ae4f0693f1a503"
+        "user": "662a02d135e74805d6f7b117"
     },
     {
         "typeOfExpense": "bill",
         "item": "newspapers",
         "monthly": 2110,
-        "user": "66217b5dd1ae4f0693f1a503"
+        "user": "662a02d135e74805d6f7b117"
     },
     {
         "typeOfExpense": "bill",
         "item": "society-membership",
         "monthly": 3656,
-        "user": "66217b5dd1ae4f0693f1a503"
+        "user": "662a02d135e74805d6f7b117"
     },
     {
         "typeOfExpense": "bill",
         "item": "house-rent",
         "monthly": 5020,
-        "user": "66217b5dd1ae4f0693f1a503"
+        "user": "662a02d135e74805d6f7b117"
     },
     {
         "typeOfExpense": "bill",
         "item": "repairs-maintenance",
         "monthly": 4160,
-        "user": "66217b5dd1ae4f0693f1a503"
+        "user": "662a02d135e74805d6f7b117"
     }
 ]
