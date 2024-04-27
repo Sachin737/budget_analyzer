@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 import MyExpenses from "./components/MyExpenses";
+import Summary from "./components/Summary";
+
+import { categoryData, expenseData, expenseMapping } from "./defaultData/inputFieldData";
 
 function App() {
   // all options
@@ -11,6 +14,7 @@ function App() {
 
   // list of all expenses (for user)
   const [myAllExpenses, setMyAllExpenses] = useState([]);
+  const [mySummary, setMySummary] = useState([]);
 
   // selected options in form
   const [selectedExpense, setSelectedExpense] = useState("");
@@ -21,12 +25,6 @@ function App() {
   const [salary, setSalary] = useState(1200000);
   const [userId, setUserId] = useState("user123");
 
-  const [expenseOptions, setExpenseOptions] = useState([]);
-
-  // const handleAddExpenseOption = (expense) => {
-  //   setExpenseOptions([...expenseOptions, expense]);
-  // };
-
   // to Add new expense
   const handleAddExpense = async (name, amount) => {
     const { data } = await axios.post(
@@ -35,59 +33,63 @@ function App() {
         typeOfExpense: selectedExpenseCategory,
         item: selectedExpense,
         monthly: selectedAmount,
-        user: "66217b5dd1ae4f0693f1a500", // this user id will come from jwt user session!
+        user: "662a02d135e74805d6f7b113", // this user id will come from jwt user session!
       }
     );
 
-    // updating all expense state element
-    setMyAllExpenses([...myAllExpenses, data?.data]);
-
-    // console.log(data?.data);
-  };
-
-  // to get all options in add Expense form
-  const getAllInputOption = async () => {
-    try {
+    {// get updated summary
       const { data } = await axios.get(
-        // calling admin user [as we just need input options name]
-        `${process.env.REACT_APP_API}/api/v1/users/66217b5dd1ae4f0693f1a503`
+        `${process.env.REACT_APP_API}/api/v1/users/662a02d135e74805d6f7b113`
       );
-      // console.log(data?.data?.user?.expenses);
-
-      const temp = data?.data?.user?.expenses;
-      const arr = temp.map((el) => el.item);
-      const arr0 = [...new Set(temp.map((el) => el.typeOfExpense))];
-
-      // console.log(arr);
-      setCategoryTypes(arr0);
-      setExpenseTypes(arr);
-    } catch (err) {
-      console.log(err);
+      setMySummary(data?.data?.user?.summary[0]);
     }
+
+    // console.log(data?.data?.expense);
+    setMyAllExpenses(data?.data);
   };
 
-  const totalMonthlyAmount = expenseOptions.reduce(
-    (total, expense) => total + expense.monthlyAmount,
-    0
-  );
-  const percentageOfSalary = (totalMonthlyAmount * 100) / salary;
+
+
+  // const totalMonthlyAmount = expenseOptions.reduce(
+  //   (total, expense) => total + expense.monthlyAmount,
+  //   0
+  // );
+  // const percentageOfSalary = (totalMonthlyAmount * 100) / salary;
 
   useEffect(() => {
-    const intiateMyAllExpenses = async () => {
+    // fetching current all expense data
+    const intiateAllExpensesAndSummary = async () => {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_API}/api/v1/users/66217b5dd1ae4f0693f1a500`
+        `${process.env.REACT_APP_API}/api/v1/users/662a02d135e74805d6f7b113`
       );
 
       setMyAllExpenses(data?.data?.user?.expenses);
-      console.log(data?.data?.user?.expenses);
+      setMySummary(data?.data?.user?.summary[0]);
     };
 
-    intiateMyAllExpenses();
+    intiateAllExpensesAndSummary();
+  }, []);
+
+
+  // to get all options in add Expense form
+  useEffect(() => {
+    setCategoryTypes(categoryData);
+    setExpenseTypes(expenseData);
+
+    // console.log(expenseData);
   }, []);
 
   useEffect(() => {
-    getAllInputOption();
-  }, []);
+
+  }, [myAllExpenses])
+
+  // useEffect(() => {
+  //   console.log(
+  //     Object.entries(expenseMapping)
+  //       .filter(([key, value]) => value === "bill").map(([expense, typeOfExpense]) => {
+  //         console.log(expense);
+  //       }))
+  // }, [])
 
   return (
     <div className="container mx-auto min-h-screen bg-[#000] px-4 py-8 rounded-lg shadow-md">
@@ -111,7 +113,11 @@ function App() {
           {/* Expense category */}
           <select
             value={selectedExpenseCategory}
-            onChange={(e) => setSelectedExpenseCategory(e.target.value)}
+            onChange={(e) => {
+              setSelectedExpenseCategory(e.target.value);
+              // Reset selectedExpense when the category changes
+              setSelectedExpense('');
+            }}
             className="mb-4 mt-4 p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-400 block w-full"
           >
             <option value="">Category</option>
@@ -123,20 +129,22 @@ function App() {
               ))}
           </select>
 
-          {/* Expense name */}
           <select
             value={selectedExpense}
             onChange={(e) => setSelectedExpense(e.target.value)}
             className="mb-4 mt-4 p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-400 block w-full"
           >
             <option value="">Expense</option>
-            {expenseTypes &&
-              expenseTypes.map((expense, index) => (
+            {Object.entries(expenseMapping)
+              .filter(([key, value]) => value === selectedExpenseCategory)
+              .map(([expense, typeOfExpense], index) => (
                 <option key={index} value={expense}>
                   {expense}
                 </option>
               ))}
           </select>
+
+
 
           <input
             type="number"
@@ -153,56 +161,18 @@ function App() {
         </div>
 
         {/* Summary */}
-        <div className="summary bg-[#0F0F0F] rounded-lg p-4 shadow-md flex-grow w-full md:w-[60%] md:ml-8 md:mr-8">
-          <h2 className="text-xl font-semibold text-[#EEEEEE] mb-4">Summary</h2>
-          {/* {expenseOptions &&
-            expenseOptions.map((expense, index) => (
-              <div key={index} className="flex justify-between mb-2">
-                <p className="text-sm font-medium text-[#EEEEEE] w-2/6">
-                  {expense}
-                </p>
-                <p className="text-sm text-[#F2F7A1] w-1/6">{`₹${expense.monthlyAmount.toLocaleString()}`}</p>
-                <p className="text-sm text-[#F2F7A1] w-1/6">{`₹${(
-                  expense.monthlyAmount * 12
-                ).toLocaleString()}`}</p>
-                <p className="text-sm text-[#F2F7A1] w-1/6">{`${(
-                  (expense.monthlyAmount * 100) /
-                  salary
-                ).toFixed(2)}%`}</p>
-              </div>
-            ))} */}
-          {/* <div className="flex justify-between mt-4">
-            <p className="text-sm font-medium text-[#EEEEEE] w-2/6">Total</p>
-            <p className="text-sm text-[#F2F7A1] w-1/6">{`₹${totalMonthlyAmount.toLocaleString()}`}</p>
-            <p className="text-sm text-[#F2F7A1] w-1/6">{`₹${(
-              totalMonthlyAmount * 12
-            ).toLocaleString()}`}</p>
-            <p className="text-sm text-[#F2F7A1] w-1/6">{`${percentageOfSalary.toFixed(
-              2
-            )}%`}</p>
-          </div>
-          <div className="flex justify-between mt-4">
-            <p className="text-sm font-medium text-[#EEEEEE] w-2/6">Savings</p>
-            <p className="text-sm text-[#F2F7A1] w-1/6">{`₹${(
-              salary * 12 -
-              totalMonthlyAmount
-            ).toLocaleString()}`}</p>
-            <p className="text-sm text-[#F2F7A1] w-1/6">{`₹${(
-              (salary * 12 - totalMonthlyAmount) *
-              12
-            ).toLocaleString()}`}</p>
-            <p className="text-sm text-[#F2F7A1] w-1/6">{`${(
-              100 - percentageOfSalary
-            ).toFixed(2)}%`}</p>
-          </div> */}
-        </div>
+        {Object.keys(mySummary).length > 0 && (
+          <Summary mySummary={mySummary} salary={salary} />
+        )}
       </div>
 
-      {/* MY ALL EXPENSE COMPONENT */}
-      <MyExpenses
-        myAllExpenses={myAllExpenses}
-        userSalary={salary}
-      ></MyExpenses>
+      <div>
+        {/* MY ALL EXPENSE COMPONENT */}
+        <MyExpenses
+          myAllExpenses={myAllExpenses}
+          userSalary={salary}
+        />
+      </div>
     </div>
   );
 }
