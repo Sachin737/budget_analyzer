@@ -2,6 +2,28 @@ const Expense = require('./../models/expenseModel');
 const { userSummary } = require('./../controllers/userSummaryController');
 const AppError = require('../utils/appError');
 
+function preprocessVals(obj) {
+    const newObj = {};
+    const familyItem = [
+        'pocket-money',
+        'towards-gifts',
+        'medical-expenses',
+        'donation-charity',
+        'miscellaneous-expenses',
+    ];
+
+    if (familyItem.includes(obj.item)) {
+        obj.typeOfExpense = 'family-direct';
+    }
+
+    for (const key in obj) {
+        const newVal = obj[key] == 'subscription' ? 'bill' : obj[key];
+        newObj[key] = newVal;
+    }
+
+    return newObj;
+}
+
 exports.getAllExpenseDetails = async (req, res, next) => {
     try {
         const expenses = await Expense.find();
@@ -21,10 +43,11 @@ exports.addOrUpdateExpenseDetail = async (req, res, next) => {
     try {
         let expense = await Expense.findOneAndUpdate(
             { user: req.body.user, item: req.body.item },
-            req.body
+            preprocessVals(req.body)
         );
+        console.log(req.body);
         if (!expense) {
-            expense = await Expense.create(req.body);
+            expense = await Expense.create(preprocessVals(req.body));
         }
         // Update summary for the current user
         req.params.user = req.body.user;
