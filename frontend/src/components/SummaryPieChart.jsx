@@ -45,6 +45,8 @@ const SummaryPieChart = ({ salary, investment, expense }) => {
               endAngle: 360,
               cx: 200,
               cy: 150,
+
+              
             },
           ]}
         />

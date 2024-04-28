@@ -13,7 +13,7 @@ const MyExpenses = ({ myAllExpenses, userSalary }) => {
       setFilteredExpenses(myAllExpenses);
     } else {
       // console.log(myAllExpenses);
-      const filtered = (myAllExpenses)?.filter(
+      const filtered = myAllExpenses?.filter(
         (el) => el.typeOfExpense === category
       );
       setFilteredExpenses(filtered);
@@ -22,10 +22,9 @@ const MyExpenses = ({ myAllExpenses, userSalary }) => {
   };
 
   useEffect(() => {
+    console.log(myAllExpenses)
     setFilteredExpenses(myAllExpenses);
-    console.log(myAllExpenses);
-  }, [myAllExpenses]);
-
+  },[myAllExpenses]);
 
   return (
     <div className="bg-[#0F0F0F] p-4 shadow-md mt-8 md:ml-8 md:mr-8 rounded-lg overflow-hidden">
