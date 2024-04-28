@@ -11,7 +11,7 @@ const Summary = ({ mySummary, salary }) => {
     delete mySummary.__v;
     delete mySummary._id;
 
-    // percetage calculation
+    // percentage calculation
     const percentage = Object.values(mySummary).map((el) =>
       ((el / salary) * 100).toFixed(1)
     );
@@ -20,10 +20,10 @@ const Summary = ({ mySummary, salary }) => {
     const labelValues = Object.keys(mySummary);
 
     // add savings
-    let sm  = 0;
-    for(let i=0;i<percentage.length;i+=1){
+    let sm = 0;
+    for (let i = 0; i < percentage.length; i += 1) {
       sm += parseFloat(percentage[i]);
-    }           
+    }
     // console.log(percentage,sm)
     percentage.push(100 - sm);
     labelValues.push("savings");
@@ -43,9 +43,13 @@ const Summary = ({ mySummary, salary }) => {
   }, [mySummary]);
 
   return (
-    <div className="expenseAdder bg-[#0F0F0F] rounded-lg p-4 shadow-md mb-4 w-full md:w-[40%] md:mr-8 md:mb-0 md:ml-8">
-      <h2 className="text-xl font-semibold text-[#EEEEEE] mb-4">Summary</h2>
-      {data && <BarChart data={data} className="w-full p-4"></BarChart>}
+    <div className="flex flex-col md:flex-row justify-center items-center gap-4">
+      <div className="flex-grow md:w-[60%] bg-[#0F0F0F] rounded-lg p-4 shadow-md m-4 overflow-x-auto">
+        <h2 className="text-xl font-semibold text-[#EEEEEE] mb-4">
+          Expense distribution
+        </h2>
+        {data && <BarChart data={data} className="w-full p-4" />}
+      </div>
     </div>
   );
 };
