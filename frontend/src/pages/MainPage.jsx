@@ -66,8 +66,8 @@ function MainPage() {
               category === "id"
             )
           ) {
+            if (category !== "investment_outflows") sm += 12 * value;
             data.data.user.summary[0][category] *= 12;
-            sm += value;
           }
         }
       );
@@ -94,7 +94,7 @@ function MainPage() {
     setSelectedAmount(value);
 
     // Validate input value against currentMoney limit
-    if (parseInt(value, 10) > saving) {
+    if (parseInt(value * 12, 10) > saving) {
       setErrorMessage("You cannot exceed your current money limit.");
     } else {
       setErrorMessage("");
@@ -120,8 +120,8 @@ function MainPage() {
               category === "id"
             )
           ) {
+            if (category !== "investment_outflows") sm += 12 * value;
             data.data.user.summary[0][category] *= 12;
-            sm += value;
           }
         }
       );
@@ -138,6 +138,11 @@ function MainPage() {
     intiateAllExpensesAndSummary();
   }, []);
 
+  // handle salary update
+  const handleSalaryChange = (event) => {
+    setSalary(event.target.value);
+  };
+
   // to get all options in add Expense form
   useEffect(() => {
     setCategoryTypes(categoryData);
@@ -147,11 +152,18 @@ function MainPage() {
   return (
     <div className="container mx-auto min-h-screen bg-[#000] px-4 py-8 rounded-lg shadow-md">
       {/* NAVBAR */}
-      <nav className="flex items-center justify-between mb-8 bg-[#EEEEEE] fixed top-0 left-0 right-0 z-10 px-4 py-2">
-        <h1 className="text-2xl font-semibold text-black">Budget Analyser</h1>
+      <nav className="flex items-center justify-between mb-4 bg-[#4D3C77] fixed top-0 left-0 right-0 z-10 px-4 py-2">
+        <h1 className="text-2xl font-semibold text-white">Budget Analyser</h1>
         <div className="flex items-center">
-          <p className="text-black mr-4">{userId}</p>
-          <button className="px-4 py-2 bg-[#4D3C77] text-white rounded-md">
+          <h3 className="text-sm font-semibold text-white mr-2">Salary:</h3>
+          <input
+            type="number"
+            className="w-28 h-8 rounded-md px-2 py-1 focus:outline-none focus:border-blue-500"
+            value={salary}
+            onChange={handleSalaryChange}
+          />
+          <p className="text-white ml-4 mr-4">{userId}</p>
+          <button className="px-4 py-2 bg-[#FF3E58] text-white rounded-md">
             Logout
           </button>
         </div>
@@ -228,6 +240,7 @@ function MainPage() {
         <div className="md:w-full">
           <SummaryPieChart
             salary={salary}
+            setSalary={setSalary}
             investment={investment}
             expense={expense}
           />

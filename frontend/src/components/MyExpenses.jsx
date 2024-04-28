@@ -34,7 +34,7 @@ const MyExpenses = ({ myAllExpenses, userSalary }) => {
         </h2>
         <div className="mb-2 md:mb-0">
           <label htmlFor="category" className="text-[#EEEEEE] mr-2">
-            Filter by Category:
+            Filter :
           </label>
           <select
             id="category"

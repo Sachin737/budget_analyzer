@@ -19,18 +19,18 @@ const BarChart = ({ data }) => {
           boxWidth: 10, // Change the width of the legend box
         },
       },
-      scales: {
-        x: {
-          stacked: true, // Enable stacking for x-axis
-          grid: {
-            color: "#fff", // Change the color of the x-axis grid lines
-          },
+    },
+    scales: {
+      x: {
+        stacked: true, // Enable stacking for x-axis
+        grid: {
+          color: "#242323", // Change the color of the x-axis grid lines
         },
-        y: {
-          stacked: true, // Enable stacking for y-axis
-          grid: {
-            color: "#fff", // Change the color of the y-axis grid lines
-          },
+      },
+      y: {
+        stacked: true, // Enable stacking for y-axis
+        grid: {
+          color: "#242323", // Change the color of the y-axis grid lines
         },
       },
     },

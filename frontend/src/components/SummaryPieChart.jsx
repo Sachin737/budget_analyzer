@@ -1,24 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { PieChart } from "@mui/x-charts/PieChart";
 
-const SummaryPieChart = ({ salary, investment, expense }) => {
+const SummaryPieChart = ({ salary, setSalary, investment, expense }) => {
   const [saving, setSaving] = useState(0);
 
   useEffect(() => {
     setSaving(salary - investment - expense);
-    // console.log(salary, investment, expense, saving);
+    console.log(salary, investment, expense, saving);
   }, [salary, investment, expense, saving]);
 
   return (
     <div className="flex flex-col md:flex-row justify-center items-center gap-4">
       <div className="flex-grow md:w-[60%] bg-[#0F0F0F] rounded-lg p-4 shadow-md m-4 overflow-x-auto">
         <div className="flex flex-row items-center justify-around">
-        <h2 className="text-xl font-semibold text-[#EEEEEE] mb-4">Summary</h2>
-        <h3 className="text-md font-light text-[#EEEEEE] mb-4 border border-solid border-purple-500 rounded-lg py-2 px-1 bg-purple-900">salary: {salary}</h3>
+          <h2 className="text-xl font-semibold text-[#EEEEEE] mb-4">Summary</h2>
         </div>
         <PieChart
           width={600}
-          height={320}
+          height={340}
           series={[
             {
               arcLabel: (item) =>
@@ -45,10 +44,24 @@ const SummaryPieChart = ({ salary, investment, expense }) => {
               endAngle: 360,
               cx: 200,
               cy: 150,
-
-              
             },
           ]}
+          slotProps={{
+            legend: {
+              direction: "column",
+              position: { vertical: "right", horizontal: "right" },
+              padding: 0,
+              labelStyle: {
+                fontSize: 14,
+                fill: "white",
+              },
+
+              itemMarkWidth: 20,
+              itemMarkHeight: 2,
+              markGap: 5,
+              itemGap: 10,
+            },
+          }}
         />
       </div>
     </div>
