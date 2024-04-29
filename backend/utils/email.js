@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer');
+const pug = require('pug');
 const htmlToText = require('html-to-text');
 
 // new Email(user, url).sendWelcome();
@@ -9,11 +10,11 @@ module.exports = class Email {
         // this.cc = process.env.EMAIL_CC,
         this.firstName = user.name.split(' ')[0];
         this.url = url;
-        this.from = `Natours-Admin <${process.env.EMAIL_FROM}>`;
+        this.from = `Budget Analyzer <${process.env.EMAIL_FROM}>`;
     }
 
     newTransport() {
-        if (process.env.NODE_ENV === 'production') {
+        if (process.env.NODE_ENV === 'development') {
             // used mailsac --> for disposable email
             // sendinBlue(brevo) instead of sendgrid
             return nodemailer.createTransport({
@@ -69,7 +70,7 @@ module.exports = class Email {
     }
 
     async sendWelcome() {
-        await this.send('welcome', 'Welcome to the Natours Family!');
+        await this.send('welcome', 'Welcome to the Budget Analyzer!');
     }
 
     async sendPasswordReset() {
