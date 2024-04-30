@@ -22,7 +22,7 @@ const MyExpenses = ({ myAllExpenses, userSalary }) => {
   };
 
   useEffect(() => {
-    console.log(myAllExpenses)
+    // console.log(myAllExpenses)
     setFilteredExpenses(myAllExpenses);
   },[myAllExpenses]);
 

@@ -40,7 +40,7 @@ const Summary = ({ mySummary, salary }) => {
       ],
       
     });
-  }, [mySummary]);
+  }, [mySummary, salary]);
 
   return (
     <div className="flex flex-col md:flex-row justify-center items-center gap-4">

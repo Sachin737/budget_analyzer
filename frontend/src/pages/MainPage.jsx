@@ -22,9 +22,9 @@ function MainPage() {
   const [mySummary, setMySummary] = useState([]);
 
   // selected options in form
-  const [selectedExpense, setSelectedExpense] = useState(null);
-  const [selectedExpenseCategory, setSelectedExpenseCategory] = useState(null);
-  const [selectedAmount, setSelectedAmount] = useState(null);
+  const [selectedExpense, setSelectedExpense] = useState("");
+  const [selectedExpenseCategory, setSelectedExpenseCategory] = useState("");
+  const [selectedAmount, setSelectedAmount] = useState("");
 
   // user data
   const [salary, setSalary] = useState(1200000);
@@ -222,11 +222,11 @@ function MainPage() {
           <button
             onClick={() => handleAddExpense(selectedExpense, selectedAmount)} // Example values, replace with actual data input
             className="mt-4 px-4 py-2 bg-[#4D3C77] text-white rounded-md block w-full"
-            diable={
+            disable={(
               selectedExpense == null ||
               selectedAmount == null ||
               errorMessage.length
-            }
+            ).toString()}
           >
             Add
           </button>

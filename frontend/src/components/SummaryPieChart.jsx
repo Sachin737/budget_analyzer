@@ -6,7 +6,7 @@ const SummaryPieChart = ({ salary, setSalary, investment, expense }) => {
 
   useEffect(() => {
     setSaving(salary - investment - expense);
-    console.log(salary, investment, expense, saving);
+    // console.log(salary, investment, expense, saving);
   }, [salary, investment, expense, saving]);
 
   return (
@@ -49,7 +49,7 @@ const SummaryPieChart = ({ salary, setSalary, investment, expense }) => {
           slotProps={{
             legend: {
               direction: "column",
-              position: { vertical: "right", horizontal: "right" },
+              position: { vertical: "middle", horizontal: "right" },
               padding: 0,
               labelStyle: {
                 fontSize: 14,

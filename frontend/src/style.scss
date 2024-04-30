@@ -41,7 +41,7 @@
       input {
         background-color: rgb(241, 241, 241);
         width: 240px;
-        padding: 15px 20px;
+        padding: 6px 20px;
         border: none;
         outline: none;
         border-bottom: 1px solid #756fc9;
@@ -95,6 +95,10 @@
     p {
       color: #4d4268;
       font-size: 14px;
+    }
+    .error {
+      color: red;
+      font-size: 12px;
     }
   }
 }
