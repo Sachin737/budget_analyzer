@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "cookie-parser": "^1.4.6",
-    "validator": "^13.11.0",
-    "zxcvbn": "^4.4.2"
-  }
-}
