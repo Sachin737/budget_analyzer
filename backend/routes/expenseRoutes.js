@@ -1,17 +1,18 @@
 const express = require('express');
 const expenseController = require('./../controllers/expenseController');
+const { protect } = require("../controllers/authController");
 
 const router = express.Router();
 
 router
     .route('/')
-    .get(expenseController.getAllExpenseDetails)
-    .post(expenseController.addOrUpdateExpenseDetail);
+    .get(protect, expenseController.getAllExpenseDetails)
+    .post(protect, expenseController.addOrUpdateExpenseDetail);
 
 router
     .route('/:id')
-    .get(expenseController.getExpenseDetail)
-    .patch(expenseController.updateExpenseDetail)
-    .delete(expenseController.deleteExpenseDetail);
+    .get(protect, expenseController.getExpenseDetail)
+    .patch(protect, expenseController.updateExpenseDetail)
+    .delete(protect, expenseController.deleteExpenseDetail);
 
 module.exports = router;

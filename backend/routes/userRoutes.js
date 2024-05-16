@@ -1,6 +1,7 @@
 const express = require('express');
 const userController = require('./../controllers/userController');
 const authController = require('./../controllers/authController');
+const { protect } = require("../controllers/authController");
 
 const router = express.Router();
 
@@ -9,6 +10,13 @@ router.post('/login', authController.login);
 router.post('/logout', authController.logout);
 router.post('/forgotPassword', authController.forgotPassword);
 router.post('/resetPassword/:token', authController.resetPassword);
+
+// Protection route for user page
+router.get("/user-auth", protect, (req, res) => {
+    res.status(200).send({
+        ok: true,
+    });
+});
 
 router
     .route('/')

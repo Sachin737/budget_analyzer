@@ -4,23 +4,29 @@ const AuthContext = createContext();
 
 const AuthProvider = (props) => {
   const [auth, setAuth] = useState({
-    user: null,
     token: "",
   });
 
-  //   whenever we refresh page auth will get set to
-  //   it value again by using local storage
-  // Else if we dont do this then : it will be stored only
-  // in local storage but not in out auth context
-  useEffect(() => {
-    let data = JSON.parse(localStorage.getItem("auth"));
-    // //console.log(data?.token, "adfa");
+  // Function to parse cookies
+  const parseCookies = () => {
+    return document.cookie.split('; ').reduce((acc, cookie) => {
+      const [name, value] = cookie.split('=');
+      acc[name] = value;
+      return acc;
+    }, {});
+  };
 
-    if (data?.success) {
+  useEffect(() => {
+    // Retrieve token from cookies
+    const cookies = parseCookies();
+    const token = cookies.token; // Adjust the cookie name as needed
+    
+    // console.log(cookies)
+
+    if (token) {
       setAuth({
         ...auth,
-        user: data.user,
-        token: data.token,
+        token: token,
       });
     }
   }, []);
@@ -31,9 +37,5 @@ const AuthProvider = (props) => {
     </AuthContext.Provider>
   );
 };
-
-// const useAuth = () => {
-//   useContext(AuthContext);
-// };
 
 export { AuthContext, AuthProvider };

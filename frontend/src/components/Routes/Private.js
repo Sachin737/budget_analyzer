@@ -13,13 +13,13 @@ const PrivateRoute = () => {
 
   useEffect(() => {
     const checkUser = async () => {
-     
+
       const res = await axios.get(
-        `${process.env.REACT_APP_API}/api/v1/auth/user-auth`,
-        {
+        `${process.env.REACT_APP_API}/api/v1/users/user-auth`,
+        { 
           headers: {
-            authorization: auth?.token,
-          },
+            authorization: `Bearer ${auth?.token}`,
+          }
         }
       );
 
@@ -34,7 +34,7 @@ const PrivateRoute = () => {
       checkUser();
     }
   }, [auth?.token]);
-  return ok ? <Outlet /> : <div></div>;
+  return ok ? <Outlet /> : <div>Please LogIn!</div>;
 };
 
 export default PrivateRoute;

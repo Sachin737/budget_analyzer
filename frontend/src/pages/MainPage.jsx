@@ -1,10 +1,13 @@
 import "../App.css";
-import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState, useContext, useCallback, useId } from "react";
 import axios from "axios";
+import { AuthContext } from "../Context/auth";
 
 import MyExpenses from "../components/MyExpenses";
 import Summary from "../components/Summary";
 import SummaryPieChart from "../components/SummaryPieChart";
+import { jwtDecode } from "jwt-decode";
 
 import {
   categoryData,
@@ -13,6 +16,9 @@ import {
 } from "../defaultData/inputFieldData";
 
 function MainPage() {
+  // context data
+  const [auth, setAuth] = useContext(AuthContext);
+
   // all options
   const [expenseTypes, setExpenseTypes] = useState([]);
   const [categoryTypes, setCategoryTypes] = useState([]);
@@ -28,13 +34,15 @@ function MainPage() {
 
   // user data
   const [salary, setSalary] = useState(1200000);
-  const [userId, setUserId] = useState("user123");
+  const [userId, setUserId] = useState(0);
   const [investment, setInvestment] = useState(0);
   const [expense, setExpense] = useState(0);
   const [saving, setSaving] = useState(0);
 
   // error message
   const [errorMessage, setErrorMessage] = useState("");
+
+  const navigate = useNavigate();
 
   // to Add new expense
   const handleAddExpense = async (event, name, amount) => {
@@ -44,20 +52,27 @@ function MainPage() {
         typeOfExpense: selectedExpenseCategory,
         item: selectedExpense,
         monthly: selectedAmount,
-        user: "662a02d135e74805d6f7b113", // this user id will come from jwt user session!
+        user: userId,
+      },
+      {
+        headers: {
+          authorization: `Bearer ${auth.token}`,
+        },
       }
     );
 
     {
       // get updated summary
       const { data } = await axios.get(
-        `${process.env.REACT_APP_API}/api/v1/users/662a02d135e74805d6f7b113`
+        `${process.env.REACT_APP_API}/api/v1/users/${userId}`
       );
 
       // Converting mothly summary to yearly summary and updating total expense
       let sm = 0;
-      Object.entries(data?.data?.user?.summary[0]).forEach(
-        ([category, value]) => {
+      let tempSummary = data?.data?.user?.summary;
+
+      if (tempSummary.length > 0) {
+        Object.entries(tempSummary[0]).forEach(([category, value]) => {
           if (
             !(
               category === "user" ||
@@ -67,15 +82,18 @@ function MainPage() {
             )
           ) {
             if (category !== "investment_outflows") sm += 12 * value;
-            data.data.user.summary[0][category] *= 12;
+            tempSummary[0][category] *= 12;
           }
-        }
-      );
-
-      setMySummary(data?.data?.user?.summary[0]);
+        });
+      }
 
       // updating investment contribution
-      setInvestment(data?.data?.user?.summary[0].investment_outflows);
+      if (tempSummary.length) {
+        setMySummary(data?.data?.user?.summary[0]);
+        setInvestment(data?.data?.user?.summary[0].investment_outflows);
+      } else {
+        setInvestment(0);
+      }
 
       // updating expense
       setExpense(sm);
@@ -101,53 +119,79 @@ function MainPage() {
     }
   };
 
-  useEffect(() => {
-    // fetching current all expense data
-    const intiateAllExpensesAndSummary = async () => {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_API}/api/v1/users/662a02d135e74805d6f7b113`
-      );
+  // fetching current all expense data
+  const intiateAllExpensesAndSummary = async () => {
+    if (!userId) return;
 
-      // Converting mothly summary to yearly summary and updating total expense
-      let sm = 0;
-      Object.entries(data?.data?.user?.summary[0]).forEach(
-        ([category, value]) => {
-          if (
-            !(
-              category === "user" ||
-              category === "__v" ||
-              category === "_id" ||
-              category === "id"
-            )
-          ) {
-            if (category !== "investment_outflows") sm += 12 * value;
-            data.data.user.summary[0][category] *= 12;
-          }
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_API}/api/v1/users/${userId}`
+    );
+
+    // Converting mothly summary to yearly summary and updating total expense
+    let sm = 0;
+    let tempSummary = data?.data?.user?.summary;
+
+    if (tempSummary.length > 0) {
+      Object.entries(tempSummary[0]).forEach(([category, value]) => {
+        if (
+          !(
+            category === "user" ||
+            category === "__v" ||
+            category === "_id" ||
+            category === "id"
+          )
+        ) {
+          if (category !== "investment_outflows") sm += 12 * value;
+          tempSummary[0][category] *= 12;
         }
-      );
+      });
+    }
 
-      setMyAllExpenses(data?.data?.user?.expenses);
+    // updating investment contribution
+    if (tempSummary.length) {
       setMySummary(data?.data?.user?.summary[0]);
-
-      // updating investment contribution
       setInvestment(data?.data?.user?.summary[0].investment_outflows);
-      setExpense(sm);
-      setSaving(salary - investment - expense);
-    };
+    } else {
+      setInvestment(0);
+    }
 
-    intiateAllExpensesAndSummary();
-  }, []);
+    // updating expense
+    setExpense(sm);
+
+    // updating savings
+    setSaving(salary - investment - expense);
+
+    // updating myAll expenses
+    setMyAllExpenses(data?.data?.user?.expenses);
+  };
+
+  // handle user logout
+  const handleLogout = async () => {
+    document.cookie = "token=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+    navigate("/");
+    window.location.reload();
+  };
 
   // handle salary update
   const handleSalaryChange = (event) => {
     setSalary(event.target.value);
   };
 
-  // to get all options in add Expense form
+  useEffect(() => {
+    // Decode user ID from JWT token
+    const decodedToken = jwtDecode(auth.token);
+    setUserId(decodedToken.id);
+  }, []);
+
+  useEffect(() => {
+    intiateAllExpensesAndSummary();
+  }, [userId, intiateAllExpensesAndSummary]);
+
+  // // to get all options in add Expense form
   useEffect(() => {
     setCategoryTypes(categoryData);
     setExpenseTypes(expenseData);
-  }, []);
+  }, [userId]);
 
   return (
     <div className="container mx-auto min-h-screen bg-[#000] px-4 py-8 rounded-lg shadow-md">
@@ -163,7 +207,10 @@ function MainPage() {
             onChange={handleSalaryChange}
           />
           <p className="text-white ml-4 mr-4">{userId}</p>
-          <button className="px-4 py-2 bg-[#FF3E58] text-white rounded-md">
+          <button
+            className="px-4 py-2 bg-[#FF3E58] text-white rounded-md"
+            onClick={handleLogout}
+          >
             Logout
           </button>
         </div>

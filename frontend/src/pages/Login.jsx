@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { React, useContext, useState } from "react";
+import { React, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import "../style.scss";
 import { AuthContext } from "../Context/auth";
@@ -20,36 +20,34 @@ const Login = () => {
       );
 
       if (data?.status) {
-        // setTimeout(() => {
-        //   toast.success(data?.message);
-        // }, 500);
-
         // saving user info using context api
-
         setAuth({
           user: data?.data?.user,
           token: data?.token,
         });
-
-        // console.log(data?.data);
-
-        // saving data in local storage
-        localStorage.setItem("auth", JSON.stringify(data));
+        
+        // Saving data in a cookie
+        document.cookie = `token=${data?.token}`;
+        // console.log(data?.token);
 
         navigate(location.state || "/user");
       } else {
-        // toast.error(data?.message);
+        // Handle unsuccessful login
       }
     } catch (err) {
       console.log(err);
-      // toast.error("Something went wrong!");
+      // Handle error
     }
   };
+
+  useEffect(()=>{
+    
+  },[])
 
   return (
     <div className="container1">
       <div className="wrapper">
-        <span className="logo">Chit Chat</span>
+        <span className="logo">Budget Analyzer</span>
         <span className="title">LogIn</span>
         <form action="">
           <input
