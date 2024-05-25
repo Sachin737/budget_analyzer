@@ -3,6 +3,7 @@ import { React, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import "../style.scss";
 import { AuthContext } from "../Context/auth";
+import toast, { Toaster } from "react-hot-toast";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -25,7 +26,7 @@ const Login = () => {
           user: data?.data?.user,
           token: data?.token,
         });
-        
+
         // Saving data in a cookie
         document.cookie = `token=${data?.token}`;
         // console.log(data?.token);
@@ -35,14 +36,18 @@ const Login = () => {
         // Handle unsuccessful login
       }
     } catch (err) {
-      console.log(err);
       // Handle error
+      console.log(err);
+      toast.error(err);
     }
   };
 
-  useEffect(()=>{
-    
-  },[])
+  useEffect(() => {
+    console.log(auth.token);
+    if (auth.token) {
+      navigate("/user");
+    }
+  });
 
   return (
     <div className="container1">
