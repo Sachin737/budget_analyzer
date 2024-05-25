@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import validator from "validator";
 import zxcvbn from "zxcvbn";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -12,12 +13,10 @@ const Register = () => {
     passwordConfirm: "",
   });
 
-  const [errors, setErrors] = useState({});
   const [isSigningUp, setIsSigningUp] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
-    setErrors({}); // Clear any previous errors
   };
 
   const validateForm = () => {
@@ -46,16 +45,14 @@ const Register = () => {
       errors.weakPassword = true;
     }
 
-    setErrors(errors);
-
-    return Object.keys(errors).length === 0;
+    return errors;
   };
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    const isValid = validateForm();
+    const errors = validateForm();
 
-    if (isValid) {
+    if (Object.keys(errors).length == 0) {
       try {
         setIsSigningUp(true);
 
@@ -63,7 +60,7 @@ const Register = () => {
           `${process.env.REACT_APP_API}/api/v1/users/signup`,
           formData
         );
-        
+
         // console.log(data);
         // Optionally, you can reset the form after successful signup
         setFormData({
@@ -73,9 +70,22 @@ const Register = () => {
           passwordConfirm: "",
         });
       } catch (error) {
-        console.error("Error:", error);
+        toast.error("server error");
       } finally {
         setIsSigningUp(false);
+      }
+    } else {
+      if (errors.emptyFields) {
+        toast.error("Empty fields");
+      }
+      if (errors.passwordMismatch) {
+        toast.error("password don't match");
+      }
+      if (errors.invalidEmail) {
+        toast.error("invalid email address");
+      }
+      if (errors.weakPassword) {
+        toast.error("password is weak");
       }
     }
   };
@@ -114,18 +124,7 @@ const Register = () => {
             value={formData.passwordConfirm}
             onChange={handleChange}
           />
-          {errors.emptyFields && (
-            <p className="error">All fields are required.</p>
-          )}
-          {errors.passwordMismatch && (
-            <p className="error">Passwords don't match.</p>
-          )}
-          {errors.invalidEmail && (
-            <p className="error">Invalid email address.</p>
-          )}
-          {errors.weakPassword && (
-            <p className="error">Password is too weak.</p>
-          )}
+
           <button onClick={handleSignUp} disabled={isSigningUp}>
             {isSigningUp ? "Signing Up..." : "Sign Up"}
           </button>

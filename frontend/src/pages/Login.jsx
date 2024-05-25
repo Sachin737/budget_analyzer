@@ -31,14 +31,15 @@ const Login = () => {
         document.cookie = `token=${data?.token}`;
         // console.log(data?.token);
 
+        toast.success("Login successfully");
         navigate(location.state || "/user");
       } else {
         // Handle unsuccessful login
+        toast.error("Email or password is incorrect");
       }
     } catch (err) {
       // Handle error
-      console.log(err);
-      toast.error(err);
+      toast.error("Email or password is incorrect");
     }
   };
 

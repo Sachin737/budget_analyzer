@@ -14,6 +14,7 @@ import {
   expenseData,
   expenseMapping,
 } from "../defaultData/inputFieldData";
+import toast from "react-hot-toast";
 
 function MainPage() {
   // context data
@@ -30,7 +31,7 @@ function MainPage() {
   // selected options in form
   const [selectedExpense, setSelectedExpense] = useState("");
   const [selectedExpenseCategory, setSelectedExpenseCategory] = useState("");
-  const [selectedAmount, setSelectedAmount] = useState("");
+  const [selectedAmount, setSelectedAmount] = useState(0);
 
   // user data
   const [salary, setSalary] = useState(1200000);
@@ -46,63 +47,67 @@ function MainPage() {
 
   // to Add new expense
   const handleAddExpense = async (event, name, amount) => {
-    const { data } = await axios.post(
-      `${process.env.REACT_APP_API}/api/v1/expenses`,
-      {
-        typeOfExpense: selectedExpenseCategory,
-        item: selectedExpense,
-        monthly: selectedAmount,
-        user: userId,
-      },
-      {
-        headers: {
-          authorization: `Bearer ${auth.token}`,
+    try {
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_API}/api/v1/expenses`,
+        {
+          typeOfExpense: selectedExpenseCategory,
+          item: selectedExpense,
+          monthly: selectedAmount,
+          user: userId,
         },
-      }
-    );
-
-    {
-      // get updated summary
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_API}/api/v1/users/${userId}`
+        {
+          headers: {
+            authorization: `Bearer ${auth.token}`,
+          },
+        }
       );
 
-      // Converting mothly summary to yearly summary and updating total expense
-      let sm = 0;
-      let tempSummary = data?.data?.user?.summary;
+      {
+        // get updated summary
+        const { data } = await axios.get(
+          `${process.env.REACT_APP_API}/api/v1/users/${userId}`
+        );
 
-      if (tempSummary.length > 0) {
-        Object.entries(tempSummary[0]).forEach(([category, value]) => {
-          if (
-            !(
-              category === "user" ||
-              category === "__v" ||
-              category === "_id" ||
-              category === "id"
-            )
-          ) {
-            if (category !== "investment_outflows") sm += 12 * value;
-            tempSummary[0][category] *= 12;
-          }
-        });
+        // Converting mothly summary to yearly summary and updating total expense
+        let sm = 0;
+        let tempSummary = data?.data?.user?.summary;
+
+        if (tempSummary.length > 0) {
+          Object.entries(tempSummary[0]).forEach(([category, value]) => {
+            if (
+              !(
+                category === "user" ||
+                category === "__v" ||
+                category === "_id" ||
+                category === "id"
+              )
+            ) {
+              if (category !== "investment_outflows") sm += 12 * value;
+              tempSummary[0][category] *= 12;
+            }
+          });
+        }
+
+        // updating investment contribution
+        if (tempSummary.length) {
+          setMySummary(data?.data?.user?.summary[0]);
+          setInvestment(data?.data?.user?.summary[0].investment_outflows);
+        } else {
+          setInvestment(0);
+        }
+
+        // updating expense
+        setExpense(sm);
+
+        // updating savings
+        setSaving(salary - investment - expense);
+
+        // updating myAll expenses
+        setMyAllExpenses(data?.data?.user?.expenses);
       }
-
-      // updating investment contribution
-      if (tempSummary.length) {
-        setMySummary(data?.data?.user?.summary[0]);
-        setInvestment(data?.data?.user?.summary[0].investment_outflows);
-      } else {
-        setInvestment(0);
-      }
-
-      // updating expense
-      setExpense(sm);
-
-      // updating savings
-      setSaving(salary - investment - expense);
-
-      // updating myAll expenses
-      setMyAllExpenses(data?.data?.user?.expenses);
+    } catch (err) {
+      toast.error("Fill all required fields!");
     }
   };
 
@@ -168,6 +173,8 @@ function MainPage() {
   // handle user logout
   const handleLogout = async () => {
     document.cookie = "token=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+
+    toast.success("Logout successfully");
     navigate("/");
     window.location.reload();
   };
@@ -185,7 +192,7 @@ function MainPage() {
 
   useEffect(() => {
     intiateAllExpensesAndSummary();
-  }, [userId, intiateAllExpensesAndSummary]);
+  }, [userId]);
 
   // // to get all options in add Expense form
   useEffect(() => {
@@ -197,9 +204,11 @@ function MainPage() {
     <div className="container mx-auto min-h-screen bg-[#000] px-4 py-8 rounded-lg shadow-md">
       {/* NAVBAR */}
       <nav className="flex items-center justify-between mb-4 bg-[#4D3C77] fixed top-0 left-0 right-0 z-10 px-4 py-2">
-        <h1 className="text-2xl font-semibold text-white">Budget Analyser</h1>
+        <h1 className="text-2xl font-semibold text-white">Budget Planner</h1>
         <div className="flex items-center">
-          <h3 className="text-sm font-semibold text-white mr-2">Salary:</h3>
+          <h3 className="text-sm font-semibold text-white m r-2 mr-1">
+            Salary :
+          </h3>
           <input
             type="number"
             className="w-28 h-8 rounded-md px-2 py-1 focus:outline-none focus:border-blue-500"
