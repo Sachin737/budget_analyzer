@@ -44,7 +44,7 @@ const Login = () => {
   };
 
   useEffect(() => {
-    console.log(auth.token);
+    // console.log(auth.token);
     if (auth.token) {
       navigate("/user");
     }
@@ -53,7 +53,7 @@ const Login = () => {
   return (
     <div className="container1">
       <div className="wrapper">
-        <span className="logo">Budget Analyzer</span>
+        <span className="logo">Budget Planner</span>
         <span className="title">LogIn</span>
         <form action="">
           <input
@@ -74,7 +74,7 @@ const Login = () => {
           <button onClick={formSubmitHandler}>Log In</button>
         </form>
         <p>
-          Don't have an account ? <Link to="/register">SignUp</Link>
+          Don't have an account ? <Link className="text-black" to="/register">SignUp</Link>
         </p>
       </div>
     </div>

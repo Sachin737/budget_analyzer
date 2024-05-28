@@ -3,11 +3,12 @@ import React, { useEffect } from "react";
 import { AuthContext } from "../../Context/auth";
 import { useContext, useState } from "react";
 import axios from "axios";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 
 const PrivateRoute = () => {
   const [auth] = useContext(AuthContext);
   const [ok, setOk] = useState(false);
+  const navigate = useNavigate();
 
   // //console.log(auth.user);
 
@@ -16,7 +17,7 @@ const PrivateRoute = () => {
 
       const res = await axios.get(
         `${process.env.REACT_APP_API}/api/v1/users/user-auth`,
-        { 
+        {
           headers: {
             authorization: `Bearer ${auth?.token}`,
           }
@@ -34,7 +35,16 @@ const PrivateRoute = () => {
       checkUser();
     }
   }, [auth?.token]);
-  return ok ? <Outlet /> : <div>Please LogIn!</div>;
+  return ok ? <Outlet /> : <div className="container1">
+    <div className="wrapper">
+      <span className="logo">Budget Analyzer</span>
+      <button onClick={() => { navigate("/") }}>
+        Login Please
+      </button>
+    </div>
+  </div>;
 };
+
+
 
 export default PrivateRoute;

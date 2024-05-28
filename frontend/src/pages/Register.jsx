@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import validator from "validator";
 import zxcvbn from "zxcvbn";
 import toast from "react-hot-toast";
 
 const Register = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -69,6 +71,8 @@ const Register = () => {
           password: "",
           passwordConfirm: "",
         });
+        toast.success("Signed up successfully");
+        navigate("/");
       } catch (error) {
         toast.error("server error");
       } finally {
@@ -93,7 +97,7 @@ const Register = () => {
   return (
     <div className="container1">
       <div className="wrapper">
-        <span className="logo">Chit Chat</span>
+        <span className="logo">Budget Planner</span>
         <span className="title">Register</span>
         <form>
           <input
@@ -130,7 +134,7 @@ const Register = () => {
           </button>
         </form>
         <p>
-          Already Registered ? <Link to="/">Login</Link>
+          Already Registered ? <Link className="text-black" to="/">Login</Link>
         </p>
       </div>
     </div>

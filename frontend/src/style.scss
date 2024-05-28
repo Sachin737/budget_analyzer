@@ -103,6 +103,25 @@
   }
 }
 
+// styling for login please page
+.container1 {
+  .wrapper {
+    button {
+      position: relative;
+      background-color: #3a58b2;
+      padding: 15px;
+      font-weight: bold;
+      font-size: 14px;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-bottom: 3px solid rgb(0, 0, 0);
+      border-right: 3px solid rgb(0, 0, 0);
+      transition-duration: 0.2s;
+    }
+  }
+}
+
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
   .wrapper {
