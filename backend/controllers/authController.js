@@ -21,7 +21,7 @@ const createSendToken = (user, statusCode, req, res) => {
             Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
         ),
         httpOnly: true,
-        secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
+        secure: false
     });
 
     // Remove password from output
@@ -37,6 +37,7 @@ const createSendToken = (user, statusCode, req, res) => {
 };
 
 exports.signup = catchAsync(async (req, res, next) => {
+
     const newUser = await User.create({
         name: req.body.name,
         email: req.body.email,
@@ -55,6 +56,8 @@ exports.signup = catchAsync(async (req, res, next) => {
 
 exports.login = catchAsync(async (req, res, next) => {
     const { email, password } = req.body; // variable name and property name are
+    // console.log(email, password);
+
     // same so we can use destructuring
 
     // 1) Check if email and password exist
@@ -88,15 +91,18 @@ exports.logout = (req, res) => {
 exports.protect = catchAsync(async (req, res, next) => {
     // 1) Getting token and check it it's there
     let token;
+    // console.log(req.headers);
+
     if (
         req.headers.authorization &&
         req.headers.authorization.startsWith('Bearer')
     ) {
         token = req.headers.authorization.split(' ')[1];
     } else if (req.cookies.jwt) {
-        token = req.cookies.jwt;
+        
     }
-    // console.log(token);
+    
+    // console.log(req.cookies);
 
     if (!token) {
         return next(

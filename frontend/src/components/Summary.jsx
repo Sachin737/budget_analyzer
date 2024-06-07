@@ -13,7 +13,7 @@ const Summary = ({ mySummary, salary }) => {
 
     // percentage calculation
     const percentage = Object.values(mySummary).map((el) =>
-      ((el / salary) * 100).toFixed(1)
+      (((el) / salary) * 100).toFixed(1)
     );
 
     // label for expense category
@@ -24,7 +24,6 @@ const Summary = ({ mySummary, salary }) => {
     for (let i = 0; i < percentage.length; i += 1) {
       sm += parseFloat(percentage[i]);
     }
-    // console.log(percentage,sm)
     percentage.push(100 - sm);
     labelValues.push("savings");
 
@@ -39,8 +38,9 @@ const Summary = ({ mySummary, salary }) => {
           fill: false,
         },
       ],
+      
     });
-  }, [mySummary]);
+  }, [mySummary, salary]);
 
   return (
     <div className="flex flex-col md:flex-row justify-center items-center gap-4">

@@ -1,12 +1,15 @@
 const express = require('express');
 const morgan = require('morgan'); // logs the requests
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
 const userRouter = require('./routes/userRoutes');
 const expenseRouter = require('./routes/expenseRoutes');
 const summaryRouter = require('./routes/summaryRoutes');
 
 const app = express();
+
+app.use(cookieParser());
 
 app.enable('trust proxy');
 

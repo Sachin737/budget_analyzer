@@ -7,28 +7,36 @@ const BarChart = ({ data }) => {
   const options = {
     plugins: {
       datalabels: {
-        color: "#fff", // Change the color of the data labels
+        display: false,
+      },
+
+      legend: {
+        display: true, // Show or hide the legend
+        position: "top", // Change the position of the legend
         labels: {
-          title: {
-            font: {
-              weight: "bold", // Change the font weight of the data labels
-            },
-          },
+          color: "#fff", // Change the font color of the legend labels
+          boxHeight: 10, // Change the height of the legend box
+          boxWidth: 10, // Change the width of the legend box
         },
-        anchor: "end", // Change the anchor position of the data labels
-        align: "-90", // Change the alignment of the data labels
       },
     },
-    legend: {
-      display: false, // Show or hide the legend
-      position: "top", // Change the position of the legend
-      labels: {
-        color: "#fff", // Change the font color of the legend labels
-        boxHeight: 10, // Change the height of the legend box
-        boxWidth: 5, // Change the width of the legend box
+    scales: {
+      x: {
+        stacked: true, // Enable stacking for x-axis
+        grid: {
+          color: "#242323", // Change the color of the x-axis grid lines
+        },
+      },
+      y: {
+        stacked: true, // Enable stacking for y-axis
+        grid: {
+          color: "#242323", // Change the color of the y-axis grid lines
+        },
       },
     },
-  };    
+  };
+
+  // Chart.register(ChartDataLabels);
 
   return (
     <div>
