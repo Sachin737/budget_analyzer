@@ -3,13 +3,13 @@ const morgan = require('morgan'); // logs the requests
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
+const AppError = require('./utils/appError');
+const globalErrorHandler = require('./controllers/errorController');
 const userRouter = require('./routes/userRoutes');
 const expenseRouter = require('./routes/expenseRoutes');
 const summaryRouter = require('./routes/summaryRoutes');
 
 const app = express();
-
-app.use(cookieParser());
 
 app.enable('trust proxy');
 
@@ -22,6 +22,7 @@ if (process.env.NODE_ENV === 'development') {
 
 // MIDDLEWARES
 app.use(express.json());
+app.use(cookieParser());
 
 app.use((req, res, next) => {
     req.requestTime = new Date().toISOString();
@@ -42,12 +43,10 @@ app.use('/api/v1/summaries', summaryRouter);
 
 // UNHANDLED ROUTES
 app.all('*', (req, res, next) => {
-    res.status(404).json({
-        status: 'error',
-        message: `Can't find ${req.originalUrl} on this server!`,
-    });
-    next();
+    next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
+
+app.use(globalErrorHandler);
 
 // START SERVER
 module.exports = app;
