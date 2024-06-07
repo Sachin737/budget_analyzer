@@ -21,7 +21,7 @@ const createSendToken = (user, statusCode, req, res) => {
             Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
         ),
         httpOnly: true,
-        secure: false
+        secure: false,
     });
 
     // Remove password from output
@@ -37,7 +37,6 @@ const createSendToken = (user, statusCode, req, res) => {
 };
 
 exports.signup = catchAsync(async (req, res, next) => {
-
     const newUser = await User.create({
         name: req.body.name,
         email: req.body.email,
@@ -99,9 +98,8 @@ exports.protect = catchAsync(async (req, res, next) => {
     ) {
         token = req.headers.authorization.split(' ')[1];
     } else if (req.cookies.jwt) {
-        
     }
-    
+
     // console.log(req.cookies);
 
     if (!token) {

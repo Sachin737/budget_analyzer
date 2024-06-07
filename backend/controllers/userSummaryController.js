@@ -1,5 +1,6 @@
 const Expense = require('./../models/expenseModel');
 const Summary = require('./../models/summaryModel');
+const catchAsync = require('./../utils/catchAsync');
 
 function sumUserExpenseByType(expenses) {
     return expenses.reduce((acc, curr) => {
@@ -27,25 +28,21 @@ function preprocessKeys(obj) {
     return newObj;
 }
 
-exports.userSummary = async (req, res, next) => {
-    try {
-        const expenses = await Expense.find({ user: req.params.user });
-        const groupedExpenses = preprocessKeys(sumUserExpenseByType(expenses));
+exports.userSummary = catchAsync(async (req, res, next) => {
+    const expenses = await Expense.find({ user: req.params.user });
+    const groupedExpenses = preprocessKeys(sumUserExpenseByType(expenses));
 
-        let summary = await Summary.findOneAndUpdate(
-            { user: req.params.user },
-            groupedExpenses
-        );
+    let summary = await Summary.findOneAndUpdate(
+        { user: req.params.user },
+        groupedExpenses
+    );
 
-        if (!summary) {
-            summary = await Summary.create({
-                ...groupedExpenses,
-                user: req.params.user,
-            });
-        }
-
-        return summary;
-    } catch (err) {
-        next(err);
+    if (!summary) {
+        summary = await Summary.create({
+            ...groupedExpenses,
+            user: req.params.user,
+        });
     }
-};
+
+    return summary;
+});
