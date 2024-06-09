@@ -8,6 +8,7 @@ const globalErrorHandler = require('./controllers/errorController');
 const userRouter = require('./routes/userRoutes');
 const expenseRouter = require('./routes/expenseRoutes');
 const summaryRouter = require('./routes/summaryRoutes');
+const ExpenseAnalyseRouter = require('./routes/expenseAnalyseRoutes');
 
 const app = express();
 
@@ -40,6 +41,7 @@ app.get('/', (req, res) => {
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/expenses', expenseRouter);
 app.use('/api/v1/summaries', summaryRouter);
+app.use('/api/v1/actualExpenses', ExpenseAnalyseRouter);
 
 // UNHANDLED ROUTES
 app.all('*', (req, res, next) => {
