@@ -15,7 +15,7 @@ exports.createUserSummary = catchAsync(async (req, res, next) => {
 });
 
 exports.getAllSummaryDetails = catchAsync(async (req, res, next) => {
-    const summaries = await Summary.find();
+    const summaries = await Summary.find({ user: req.user?.id });
     res.status(200).json({
         status: 'success',
         results: summaries.length,

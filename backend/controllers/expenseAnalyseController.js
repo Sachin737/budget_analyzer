@@ -3,7 +3,9 @@ const AppError = require('../utils/appError');
 const catchAsync = require('./../utils/catchAsync');
 
 exports.getAllExpenseDetails = catchAsync(async (req, res, next) => {
-    const expenses = await ExpenseAnalyse.find();
+    // of current user
+    console.log(req.user?.id);
+    const expenses = await ExpenseAnalyse.find({ user: req.user?.id });
     res.status(200).json({
         status: 'success',
         results: expenses.length,
@@ -14,13 +16,33 @@ exports.getAllExpenseDetails = catchAsync(async (req, res, next) => {
 });
 
 exports.addOrUpdateExpenseDetail = catchAsync(async (req, res, next) => {
+    let currDate = new Date();
+    if (req.body.purchagedAt) {
+        currDate = new Date(req.body.purchagedAt);
+    }
+    currDate.setUTCHours(0, 0, 0, 0);
+
     let expense = await ExpenseAnalyse.findOneAndUpdate(
-        { user: req.body.user, item: req.body.item },
-        preprocessVals(req.body)
+        {
+            user: req.user?.id,
+            purchagedAt: currDate,
+            commodityName: req.body?.commodityName,
+        },
+        {
+            $inc: { cost: req.body.cost, noOfUnit: req.body.noOfUnit },
+        },
+        { new: true, useFindAndModify: false }
     );
-    console.log(req.body);
+
+    // console.log(req.body);
+
     if (!expense) {
-        expense = await ExpenseAnalyse.create(preprocessVals(req.body));
+        const actualExpense = {
+            ...req.body,
+            user: req.user?.id,
+        };
+        console.log(actualExpense);
+        expense = await ExpenseAnalyse.create(actualExpense);
     }
     // Update summary for the current user
     req.params.user = req.body.user;
