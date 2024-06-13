@@ -9,6 +9,7 @@ import MyExpenses from "../components/MyExpenses";
 import Summary from "../components/Summary";
 import SummaryPieChart from "../components/SummaryPieChart";
 import { jwtDecode } from "jwt-decode";
+import { Spinner } from "../components/Spinner";
 
 import {
   categoryData,
@@ -165,7 +166,7 @@ function MainPage() {
     // updating investment contribution
     if (tempSummary.length) {
       setMySummary(data?.data?.user?.summary[0]);
-    }  
+    }
     // updating myAll expenses
     setMyAllExpenses(data?.data?.user?.expenses);
   };
@@ -217,7 +218,7 @@ function MainPage() {
     const decodedToken = jwtDecode(auth.token);
     setUserId(decodedToken.id);
 
-    // get user name 
+    // get user name
     const fetchUserbyId = async () => {
       try {
         const { data } = await axios.get(
@@ -250,11 +251,10 @@ function MainPage() {
   });
 
   const [showButton, setShowButton] = useState(false);
-  
+
   useEffect(() => {
     intiateAllExpensesAndSummary();
   }, [userId]);
-
 
   // // to get all options in add Expense form
   useEffect(() => {

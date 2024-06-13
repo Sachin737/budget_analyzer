@@ -66,7 +66,6 @@ const Analyzer = () => {
   // to Add new expense
   const handleAddExpense = async (event, name, amount) => {
     try {
-      
     } catch (err) {
       toast.error("Fill all required fields!");
     }
@@ -88,8 +87,16 @@ const Analyzer = () => {
   };
 
   // handle salary update
-  const handleSalaryChange = (event) => {
+  const handleSalaryChange = async (event) => {
     setSalary(event.target.value);
+
+    const { data } = await axios.patch(
+      `${process.env.REACT_APP_API}/api/v1/users/${userId}`,
+      {
+        salaryAfterTax: event.target.value,
+      }
+    );
+    // console.log(data);
   };
 
   // handle user logout
@@ -122,7 +129,7 @@ const Analyzer = () => {
   };
 
   useEffect(() => {
-    console.log("analyzer: ",salary, expense, investment, userName, userId);
+    // console.log("analyzer: ",salary, expense, investment, userName, userId);
 
     // Handle scroll button visibility
     const handleScroll = () => {
@@ -146,14 +153,13 @@ const Analyzer = () => {
     setExpenseTypes(expenseData);
   }, [userId]);
 
-
   // to get userId and name
   useEffect(() => {
     // Decode user ID from JWT token
     const decodedToken = jwtDecode(auth.token);
     setUserId(decodedToken.id);
 
-    // get user name 
+    // get user name
     const fetchUserbyId = async () => {
       try {
         const { data } = await axios.get(

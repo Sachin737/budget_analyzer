@@ -67,7 +67,7 @@ const UserDataProvider = (props) => {
     // updating salary
     setSalary(data?.data?.user?.salaryAfterTax);
 
-    console.log("context:",data?.data?.user?.salaryAfterTax, sm, data?.data?.user?.summary[0].investment_outflows)
+    // console.log("context:",data?.data?.user?.salaryAfterTax, sm, data?.data?.user?.summary[0].investment_outflows)
   };
 
 
