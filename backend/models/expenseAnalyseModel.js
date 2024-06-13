@@ -28,12 +28,26 @@ const expenseAnalyseSchema = new mongoose.Schema(
             required: [true, 'Expense must belong to an user.'],
         },
     },
-    { timestamps: true },
+    // { timestamps: true },
     {
         toJSON: { virtuals: true },
         toObject: { virtuals: true }, // helps display virtual fields into the json and object
     }
 );
+
+// pre-save middleware
+expenseAnalyseSchema.pre('save', function (next) {
+    if (!this.purchagedAt) {
+        const currentDate = new Date();
+        currentDate.setUTCHours(0, 0, 0, 0);
+        this.purchagedAt = currentDate;
+    } else {
+        const parsedDate = new Date(this.purchagedAt);
+        parsedDate.setUTCHours(0, 0, 0, 0);
+        this.purchagedAt = parsedDate;
+    }
+    next();
+});
 
 const ExpenseAnalyse = mongoose.model('ExpenseAnalyse', expenseAnalyseSchema);
 

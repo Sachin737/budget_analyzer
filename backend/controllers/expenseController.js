@@ -26,7 +26,7 @@ function preprocessVals(obj) {
 }
 
 exports.getAllExpenseDetails = catchAsync(async (req, res, next) => {
-    const expenses = await Expense.find();
+    const expenses = await Expense.find({ user: req.user?.id });
     res.status(200).json({
         status: 'success',
         results: expenses.length,
@@ -38,7 +38,7 @@ exports.getAllExpenseDetails = catchAsync(async (req, res, next) => {
 
 exports.addOrUpdateExpenseDetail = catchAsync(async (req, res, next) => {
     let expense = await Expense.findOneAndUpdate(
-        { user: req.body.user, item: req.body.item },
+        { user: req.user?.id, item: req.body.item },
         preprocessVals(req.body)
     );
     console.log(req.body);
