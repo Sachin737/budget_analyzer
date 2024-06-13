@@ -17,7 +17,7 @@ import {
 } from "../defaultData/inputFieldData";
 import toast from "react-hot-toast";
 
-function MainPage() {
+const Analyzer = () => {
   // to edit salary
   const [isEditable, setIsEditable] = useState(false); // Initialize edit state
 
@@ -56,66 +56,17 @@ function MainPage() {
   // error message
   const [errorMessage, setErrorMessage] = useState("");
 
+  const [showButton, setShowButton] = useState(false);
+
+  // number of unit state
+  const [NoOfUnit, setNoOfUnit] = useState(0);
+
   const navigate = useNavigate();
 
   // to Add new expense
   const handleAddExpense = async (event, name, amount) => {
     try {
-      const { data } = await axios.post(
-        `${process.env.REACT_APP_API}/api/v1/expenses`,
-        {
-          typeOfExpense: selectedExpenseCategory,
-          item: selectedExpense,
-          monthly: selectedAmount,
-          user: userId,
-        },
-        {
-          headers: {
-            authorization: `Bearer ${auth.token}`,
-          },
-        }
-      );
-
-      {
-        // get updated summary
-        const { data } = await axios.get(
-          `${process.env.REACT_APP_API}/api/v1/users/${userId}`
-        );
-
-        // Converting mothly summary to yearly summary and updating total expense
-        let sm = 0;
-        let tempSummary = data?.data?.user?.summary;
-
-        if (tempSummary.length > 0) {
-          Object.entries(tempSummary[0]).forEach(([category, value]) => {
-            if (
-              !(
-                category === "user" ||
-                category === "__v" ||
-                category === "_id" ||
-                category === "id"
-              )
-            ) {
-              if (category !== "investment_outflows") sm += 12 * value;
-              tempSummary[0][category] *= 12;
-            }
-          });
-        }
-
-        // updating investment contribution
-        if (tempSummary.length) {
-          setMySummary(data?.data?.user?.summary[0]);
-          setInvestment(data?.data?.user?.summary[0].investment_outflows);
-        } else {
-          setInvestment(0);
-        }
-
-        // updating expense
-        setExpense(sm);
-
-        // updating myAll expenses
-        setMyAllExpenses(data?.data?.user?.expenses);
-      }
+      
     } catch (err) {
       toast.error("Fill all required fields!");
     }
@@ -126,6 +77,8 @@ function MainPage() {
     const value = event.target.value;
     setSelectedAmount(value);
 
+    console.log(value, saving);
+
     // Validate input value against currentMoney limit
     if (parseInt(value * 12, 10) > saving) {
       setErrorMessage("You cannot exceed your current money limit.");
@@ -134,52 +87,10 @@ function MainPage() {
     }
   };
 
-  // fetching current all expense data
-  const intiateAllExpensesAndSummary = async () => {
-    if (!userId) return;
-
-    const { data } = await axios.get(
-      `${process.env.REACT_APP_API}/api/v1/users/${userId}`
-    );
-
-    // Converting mothly summary to yearly summary and updating total expense
-    let sm = 0;
-    let tempSummary = data?.data?.user?.summary;
-
-    if (tempSummary.length > 0) {
-      Object.entries(tempSummary[0]).forEach(([category, value]) => {
-        if (
-          !(
-            category === "user" ||
-            category === "__v" ||
-            category === "_id" ||
-            category === "id"
-          )
-        ) {
-          if (category !== "investment_outflows") sm += 12 * value;
-          tempSummary[0][category] *= 12;
-        }
-      });
-    }
-
-    // updating investment contribution
-    if (tempSummary.length) {
-      setMySummary(data?.data?.user?.summary[0]);
-    }  
-    // updating myAll expenses
-    setMyAllExpenses(data?.data?.user?.expenses);
+  // handle salary update
+  const handleSalaryChange = (event) => {
+    setSalary(event.target.value);
   };
-
-  // to update savings
-  useEffect(() => {
-    // Calculate savings whenever salary or expense changes
-    const calculateSavings = () => {
-      const newSaving = salary - expense - investment;
-      setSaving(newSaving);
-    };
-
-    calculateSavings();
-  }, [salary, expense, investment]);
 
   // handle user logout
   const handleLogout = async () => {
@@ -190,26 +101,51 @@ function MainPage() {
     window.location.reload();
   };
 
-  // handle salary update
-  const handleSalaryChange = async (event) => {
-    setSalary(event.target.value);
-
-    const { data } = await axios.patch(
-      `${process.env.REACT_APP_API}/api/v1/users/${userId}`,
-      {
-        salaryAfterTax: event.target.value,
-      }
-    );
-    // console.log(data);
-  };
-
-  // to scroll to TOP
+  // Page scroll to top function
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
   };
+
+  // function to decrement number of units
+  const decrement = () => {
+    if (NoOfUnit > 0) {
+      setNoOfUnit(NoOfUnit - 1);
+    }
+  };
+
+  // function to increment number of units
+  const increment = () => {
+    setNoOfUnit(NoOfUnit + 1);
+  };
+
+  useEffect(() => {
+    console.log("analyzer: ",salary, expense, investment, userName, userId);
+
+    // Handle scroll button visibility
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowButton(true);
+      } else {
+        setShowButton(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  });
+
+  // // to get all options in add Expense form
+  useEffect(() => {
+    setCategoryTypes(categoryData);
+    setExpenseTypes(expenseData);
+  }, [userId]);
+
 
   // to get userId and name
   useEffect(() => {
@@ -249,24 +185,11 @@ function MainPage() {
     };
   });
 
-  const [showButton, setShowButton] = useState(false);
-  
-  useEffect(() => {
-    intiateAllExpensesAndSummary();
-  }, [userId]);
-
-
-  // // to get all options in add Expense form
-  useEffect(() => {
-    setCategoryTypes(categoryData);
-    setExpenseTypes(expenseData);
-  }, [userId]);
-
   return (
     <div className="container mx-auto min-h-screen bg-[#000] px-4 py-8 rounded-lg shadow-md">
       {/* NAVBAR */}
       <nav className="flex items-center justify-between mb-4 bg-[#4D3C77] bg-opacity-80 fixed top-0 left-0 right-0 z-10 px-4 py-2">
-        <h1 className="text-2xl font-semibold text-white">Budget Planner</h1>
+        <h1 className="text-2xl font-semibold text-white">Budget Analyzer</h1>
         <div className="flex items-center">
           <h3 className="text-sm font-semibold text-white mr-2 mr-1">
             Salary :
@@ -307,7 +230,7 @@ function MainPage() {
           <h2 className="text-xl font-semibold text-[#EEEEEE] mb-4">
             Add Expense
           </h2>
-          {/* Expense category */}
+
           <select
             value={selectedExpenseCategory}
             onChange={(e) => {
@@ -326,20 +249,84 @@ function MainPage() {
               ))}
           </select>
 
-          <select
-            value={selectedExpense}
-            onChange={(e) => setSelectedExpense(e.target.value)}
-            className="mb-4 mt-4 p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-400 block w-full"
-          >
-            <option value="">Expense</option>
-            {Object.entries(expenseMapping)
-              .filter(([key, value]) => value === selectedExpenseCategory)
-              .map(([expense, typeOfExpense], index) => (
-                <option key={index} value={expense}>
-                  {expense}
-                </option>
-              ))}
-          </select>
+          <div className="flex items-center">
+            {/* Expense selector */}
+            <div className="flex-grow mr-2">
+              <select
+                value={selectedExpense}
+                onChange={(e) => setSelectedExpense(e.target.value)}
+                className="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-400 w-full"
+              >
+                <option value="">Commodity Name</option>
+                {Object.entries(expenseMapping)
+                  .filter(([key, value]) => value === selectedExpenseCategory)
+                  .map(([expense, typeOfExpense], index) => (
+                    <option key={index} value={expense}>
+                      {expense}
+                    </option>
+                  ))}
+              </select>
+            </div>
+
+            {/* Counter */}
+            <div className="flex items-center">
+              <button
+                type="button"
+                id="decrement-button"
+                data-input-counter-decrement="quantity-input"
+                className="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-l-lg p-2.5 h-10 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"
+                onClick={decrement}
+              >
+                <svg
+                  className="w-3 h-3 text-gray-900 dark:text-white"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 18 2"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M1 1h16"
+                  />
+                </svg>
+              </button>
+              <input
+                type="text"
+                id="quantity-input"
+                value={NoOfUnit}
+                aria-describedby="helper-text-explanation"
+                className="bg-gray-50 border border-gray-300 h-10 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 w-16 py-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="0"
+                required
+              />
+              <button
+                type="button"
+                id="increment-button"
+                data-input-counter-increment="quantity-input"
+                className="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-r-lg p-2.5 h-10 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"
+                onClick={increment}
+              >
+                <svg
+                  className="w-3 h-3 text-gray-900 dark:text-white"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 18 18"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M9 1v16M1 9h16"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
 
           <input
             type="number"
@@ -365,41 +352,11 @@ function MainPage() {
         </div>
 
         <div className="w-full md:w-[40%] md:mr-8 md:mb-0 md:ml-8">
-          <img src="/images/mainpage.png" alt="budget planner image" />
+          <img src="/images/analyzer.png" alt="budget analyzer image" />
         </div>
       </div>
-
-      {/* Summary */}
-      <div className="pt-8 flex flex-col lg:flex-row items-center justify-center">
-        <div className="md:w-full">
-          <Summary mySummary={mySummary} salary={salary} />
-        </div>
-        <div className="md:w-full">
-          <SummaryPieChart
-            salary={salary}
-            setSalary={setSalary}
-            investment={investment}
-            expense={expense}
-          />
-        </div>
-      </div>
-
-      {/* MY ALL EXPENSE COMPONENT */}
-      {myAllExpenses && (
-        <MyExpenses myAllExpenses={myAllExpenses} userSalary={salary} />
-      )}
-
-      {/* SCROLL TO TOP BUTTON */}
-      {showButton && (
-        <button
-          onClick={scrollToTop}
-          className="fixed bottom-5 right-6 bg-neutral-50 bg-opacity-80 p-3 rounded-full shadow-lg"
-        >
-          <img src="/images/top.png" height={16} width={16} />
-        </button>
-      )}
     </div>
   );
-}
+};
 
-export default MainPage;
+export default Analyzer;
