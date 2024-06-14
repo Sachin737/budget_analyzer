@@ -6,7 +6,7 @@ import { AuthContext } from "../Context/auth";
 import { UserDataContext } from "../Context/userData";
 
 import MyExpenses from "../components/MyExpenses";
-import Summary from "../components/Summary";
+import { Summary } from "../components/Summary";
 import SummaryPieChart from "../components/SummaryPieChart";
 import { jwtDecode } from "jwt-decode";
 import { Spinner } from "../components/Spinner";
@@ -185,6 +185,13 @@ function MainPage() {
   // handle user logout
   const handleLogout = async () => {
     document.cookie = "token=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_API}/api/v1/users/logout`
+    );
+
+    setAuth({
+      token: "",
+    });
 
     toast.success("Logout successfully");
     navigate("/");

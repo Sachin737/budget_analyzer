@@ -6,9 +6,12 @@ import { AuthContext } from "../Context/auth";
 import { UserDataContext } from "../Context/userData";
 
 import MyExpenses from "../components/MyExpenses";
-import Summary from "../components/Summary";
+import { MonthlySummary } from "../components/Summary";
 import SummaryPieChart from "../components/SummaryPieChart";
 import { jwtDecode } from "jwt-decode";
+import dayjs from "dayjs";
+
+import BasicDatePicker from "../components/DateTimePicker";
 
 import {
   categoryData,
@@ -40,34 +43,52 @@ const Analyzer = () => {
     setSaving,
   } = useContext(UserDataContext);
 
-  // all options
-  const [expenseTypes, setExpenseTypes] = useState([]);
-  const [categoryTypes, setCategoryTypes] = useState([]);
-
-  // list of all expenses (for user)
-  const [myAllExpenses, setMyAllExpenses] = useState([]);
-  const [mySummary, setMySummary] = useState([]);
-
   // selected options in form
   const [selectedExpense, setSelectedExpense] = useState("");
-  const [selectedExpenseCategory, setSelectedExpenseCategory] = useState("");
-  const [selectedAmount, setSelectedAmount] = useState(0);
+  const [selectedAmount, setSelectedAmount] = useState("");
+  const [setlectedDate, setSetlectedDate] = useState(dayjs("2022-04-17"));
+  const [NoOfUnit, setNoOfUnit] = useState(0);
+  const [comment, setComment] = useState("");
 
   // error message
   const [errorMessage, setErrorMessage] = useState("");
 
-  const [showButton, setShowButton] = useState(false);
-
-  // number of unit state
-  const [NoOfUnit, setNoOfUnit] = useState(0);
+  const [showButton, setShowButton] = useState(false); // goToTop button
 
   const navigate = useNavigate();
 
   // to Add new expense
   const handleAddExpense = async (event, name, amount) => {
     try {
+      if (errorMessage.length > 0)
+        throw new Error("You can't exceed your balance!");
+
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_API}/api/v1/actualExpenses`,
+        {
+          commodityName: selectedExpense,
+          noOfUnit: NoOfUnit,
+          cost: selectedAmount,
+          comments: comment,
+          purchagedAt: setlectedDate,
+          user: userId,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${auth.token}`,
+          },
+        }
+      );
+      toast.success("Added successfully");
+
+      window.location.reload();
+
+      // console.log(data);
     } catch (err) {
-      toast.error("Fill all required fields!");
+      // console.log(err.message);
+      toast.error(
+        errorMessage.length ? err.message : "Fill all the required fileds!"
+      );
     }
   };
 
@@ -76,10 +97,10 @@ const Analyzer = () => {
     const value = event.target.value;
     setSelectedAmount(value);
 
-    console.log(value, saving);
+    // console.log(value, saving);
 
     // Validate input value against currentMoney limit
-    if (parseInt(value * 12, 10) > saving) {
+    if (parseInt(value * NoOfUnit, 10) > saving) {
       setErrorMessage("You cannot exceed your current money limit.");
     } else {
       setErrorMessage("");
@@ -99,16 +120,23 @@ const Analyzer = () => {
     // console.log(data);
   };
 
-  // handle user logout
+  //////////////////// handle user logout
+  const [logoutComplete, setLogoutComplete] = useState(false);
+
   const handleLogout = async () => {
     document.cookie = "token=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-
     toast.success("Logout successfully");
-    navigate("/");
-    window.location.reload();
+    setLogoutComplete(true);
   };
 
-  // Page scroll to top function
+  useEffect(() => {
+    if (logoutComplete) {
+      navigate("/");
+      window.location.reload();
+    }
+  }, [logoutComplete, navigate]);
+
+  //////////////////// Page scroll to top function
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -146,12 +174,6 @@ const Analyzer = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   });
-
-  // // to get all options in add Expense form
-  useEffect(() => {
-    setCategoryTypes(categoryData);
-    setExpenseTypes(expenseData);
-  }, [userId]);
 
   // to get userId and name
   useEffect(() => {
@@ -237,45 +259,20 @@ const Analyzer = () => {
             Add Expense
           </h2>
 
-          <select
-            value={selectedExpenseCategory}
-            onChange={(e) => {
-              setSelectedExpenseCategory(e.target.value);
-              // Reset selectedExpense when the category changes
-              setSelectedExpense("");
-            }}
-            className="mb-4 mt-4 p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-400 block w-full"
-          >
-            <option value="">Category</option>
-            {categoryTypes &&
-              categoryTypes.map((category, index) => (
-                <option key={index} value={category}>
-                  {category}
-                </option>
-              ))}
-          </select>
-
           <div className="flex items-center">
             {/* Expense selector */}
             <div className="flex-grow mr-2">
-              <select
+              <input
+                type="text"
+                placeholder="Commodity/Service"
+                className="mt-4 p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-400 block w-full"
                 value={selectedExpense}
                 onChange={(e) => setSelectedExpense(e.target.value)}
-                className="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-400 w-full"
-              >
-                <option value="">Commodity Name</option>
-                {Object.entries(expenseMapping)
-                  .filter(([key, value]) => value === selectedExpenseCategory)
-                  .map(([expense, typeOfExpense], index) => (
-                    <option key={index} value={expense}>
-                      {expense}
-                    </option>
-                  ))}
-              </select>
+              />
             </div>
 
             {/* Counter */}
-            <div className="flex items-center">
+            <div className="flex items-center mb-[-16px]">
               <button
                 type="button"
                 id="decrement-button"
@@ -303,6 +300,7 @@ const Analyzer = () => {
                 type="text"
                 id="quantity-input"
                 value={NoOfUnit}
+                onChange={(e) => setNoOfUnit(e.target.value)}
                 aria-describedby="helper-text-explanation"
                 className="bg-gray-50 border border-gray-300 h-10 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 w-16 py-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="0"
@@ -342,6 +340,19 @@ const Analyzer = () => {
             value={selectedAmount}
           />
 
+          <input
+            type="text"
+            placeholder="comment"
+            className="mt-4 p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-400 block w-full"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+          />
+
+          <BasicDatePicker
+            setlectedDate={setlectedDate}
+            setSetlectedDate={setSetlectedDate}
+          />
+
           {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
 
           <button
@@ -360,6 +371,21 @@ const Analyzer = () => {
         <div className="w-full md:w-[40%] md:mr-8 md:mb-0 md:ml-8">
           <img src="/images/analyzer.png" alt="budget analyzer image" />
         </div>
+      </div>
+
+      {/* Summary */}
+      <div className="pt-8 flex flex-col lg:flex-row items-center justify-center">
+        <div className="md:w-full">
+          {/* <MonthlySummary mySummary={mySummary} salary={salary} /> */}
+        </div>
+        {/* <div className="md:w-full">
+          <SummaryPieChart
+            salary={salary}
+            setSalary={setSalary}
+            investment={investment}
+            expense={expense}
+          />
+        </div> */}
       </div>
     </div>
   );

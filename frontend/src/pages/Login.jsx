@@ -4,6 +4,7 @@ import axios from "axios";
 import "../style.scss";
 import { AuthContext } from "../Context/auth";
 import toast, { Toaster } from "react-hot-toast";
+import { jwtDecode } from "jwt-decode";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -44,7 +45,7 @@ const Login = () => {
   };
 
   useEffect(() => {
-    // console.log(auth.token);
+    console.log(auth.token);
     if (auth.token) {
       navigate("/user");
     }
@@ -74,7 +75,10 @@ const Login = () => {
           <button onClick={formSubmitHandler}>Log In</button>
         </form>
         <p>
-          Don't have an account ? <Link className="text-black" to="/register">SignUp</Link>
+          Don't have an account ?{" "}
+          <Link className="text-black" to="/register">
+            SignUp
+          </Link>
         </p>
       </div>
     </div>

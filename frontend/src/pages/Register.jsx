@@ -54,7 +54,7 @@ const Register = () => {
     e.preventDefault();
     const errors = validateForm();
 
-    if (Object.keys(errors).length == 0) {
+    if (Object.keys(errors).length === 0) {
       try {
         setIsSigningUp(true);
 

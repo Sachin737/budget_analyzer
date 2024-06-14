@@ -4,7 +4,7 @@ import axios from "axios";
 const UserDataContext = createContext();
 
 const UserDataProvider = (props) => {
-  const [userName, setUserName] = useState("pagal");
+  const [userName, setUserName] = useState("");
   const [salary, setSalary] = useState(0);
   const [userId, setUserId] = useState(0);
   const [investment, setInvestment] = useState(0);
