@@ -45,7 +45,7 @@ const Login = () => {
   };
 
   useEffect(() => {
-    // console.log(auth.token);
+    console.log(auth.token);
     if (auth.token) {
       navigate("/user");
     }

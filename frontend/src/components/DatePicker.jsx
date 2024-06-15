@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 import { useState } from "react";
 
@@ -13,12 +13,12 @@ const BasicDatePicker = () => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer
-        components={["DateTimePicker"]}
+        components={["DatePicker"]}
         sx={{
           paddingTop: "22px",
         }}
       >
-        <DateTimePicker
+        <DatePicker
           label="purchase date"
           value={value}
           onChange={(newValue) => setValue(newValue)}

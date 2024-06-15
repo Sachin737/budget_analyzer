@@ -24,7 +24,7 @@ function MainPage() {
   // auth context data
   const [auth, setAuth] = useContext(AuthContext);
 
-  // user context data
+  // user  data
   const [userName, setUserName] = useState("");
   const [salary, setSalary] = useState(0);
   const [userId, setUserId] = useState(0);
@@ -133,6 +133,7 @@ function MainPage() {
     const { data } = await axios.get(
       `${process.env.REACT_APP_API}/api/v1/users/${userId}`
     );
+    // console.log("main:",data)
 
     // Converting mothly summary to yearly summary and updating total expense
     let sm = 0;
@@ -185,7 +186,7 @@ function MainPage() {
 
   // handle user logout
   const handleLogout = async () => {
-    document.cookie = `token=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/user; domain=${window.location.hostname};`;
+    document.cookie = `token=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=${window.location.hostname};`;
 
     setAuth({
       token: "",
@@ -203,7 +204,7 @@ function MainPage() {
     const { data } = await axios.patch(
       `${process.env.REACT_APP_API}/api/v1/users/${userId}`,
       {
-        salaryAfterTax: event.target.value,
+        salaryAfterTax: event.target.value || salary,
       }
     );
     // console.log(data);
