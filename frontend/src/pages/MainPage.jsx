@@ -234,7 +234,7 @@ function MainPage() {
         // console.log(data.data.user);
         setUserName(data?.data?.user?.name);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
 

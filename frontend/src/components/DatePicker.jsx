@@ -20,7 +20,7 @@ const BasicDatePicker = ({ setlectedDate, setSetlectedDate }) => {
           label="purchase date"
           value={setlectedDate}
           onChange={(newValue) => {
-            console.log("New Date:", newValue);
+            // console.log("New Date:", newValue);
             setSetlectedDate(newValue);
           }}
           sx={{

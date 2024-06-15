@@ -38,6 +38,7 @@ const Analyzer = () => {
   const [setlectedDate, setSetlectedDate] = useState(dayjs("2022-04-17"));
   const [NoOfUnit, setNoOfUnit] = useState(1);
   const [comment, setComment] = useState("");
+  const [selectedYear, setSelectedYear] = useState("");
 
   // error message
   const [errorMessage, setErrorMessage] = useState("");
@@ -69,6 +70,7 @@ const Analyzer = () => {
         }
       );
       toast.success("Added successfully");
+      window.location.reload();
 
       // console.log(data);
     } catch (err) {
@@ -187,7 +189,7 @@ const Analyzer = () => {
     };
 
     fetchAllExpenses();
-  },[userId]);
+  }, [userId]);
 
   // to get userId, name and salary
   useEffect(() => {
@@ -406,18 +408,15 @@ const Analyzer = () => {
       </div>
 
       {/* Summary */}
-      <div className="pt-8 flex flex-col lg:flex-row items-center justify-center">
-        <div className="md:w-full">
-          <MonthlySummary mySummary={mySummary} salary={salary} />
-        </div>
-        {/* <div className="md:w-full">
-          <SummaryPieChart
+      <div className="flex-wrap pt-16 flex flex-col md:flex-row items-center justify-center md:my-16">
+        <div className="bg-[#0F0F0F] rounded-lg p-4 shadow-md mb-4 w-full md:w-[40%] md:mr-8 md:mb-0 md:ml-8">
+          <MonthlySummary
+            mySummary={mySummary}
             salary={salary}
-            setSalary={setSalary}
-            investment={investment}
-            expense={expense}
+            selectedYear={selectedYear}
+            setSelectedYear={setSelectedYear}
           />
-        </div> */}
+        </div>
       </div>
     </div>
   );

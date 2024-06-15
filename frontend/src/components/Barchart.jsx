@@ -48,6 +48,9 @@ const BarChart = ({ data }) => {
 const BarChartHorizontal = ({ data }) => {
   const options = {
     indexAxis: "y",
+    maintainAspectRatio: false,
+
+    hoverBackgroundColor: "#fff",
     plugins: {
       datalabels: {
         display: false,
@@ -55,7 +58,7 @@ const BarChartHorizontal = ({ data }) => {
 
       legend: {
         display: true, // Show or hide the legend
-        position: "top", // Change the position of the legend
+        position: "bottom", // Change the position of the legend
         labels: {
           color: "#fff", // Change the font color of the legend labels
           boxHeight: 10, // Change the height of the legend box
@@ -82,7 +85,7 @@ const BarChartHorizontal = ({ data }) => {
   // Chart.register(ChartDataLabels);
 
   return (
-    <div>
+    <div style={{ position: "relative", height: "60vh" }}>
       <Bar data={data} options={options} />
     </div>
   );
