@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useContext, useCallback, useId } from "react";
 import axios from "axios";
 import { AuthContext } from "../Context/auth";
-import { UserDataContext } from "../Context/userData";
 
 import MyExpenses from "../components/MyExpenses";
 import { Summary } from "../components/Summary";
@@ -26,20 +25,12 @@ function MainPage() {
   const [auth, setAuth] = useContext(AuthContext);
 
   // user context data
-  const {
-    userName,
-    setUserName,
-    salary,
-    setSalary,
-    userId,
-    setUserId,
-    investment,
-    setInvestment,
-    expense,
-    setExpense,
-    saving,
-    setSaving,
-  } = useContext(UserDataContext);
+  const [userName, setUserName] = useState("");
+  const [salary, setSalary] = useState(0);
+  const [userId, setUserId] = useState(0);
+  const [investment, setInvestment] = useState(0);
+  const [expense, setExpense] = useState(0);
+  const [saving, setSaving] = useState(0);
 
   // all options
   const [expenseTypes, setExpenseTypes] = useState([]);
@@ -163,12 +154,22 @@ function MainPage() {
       });
     }
 
+    // updating myAll expenses
+    setMyAllExpenses(data?.data?.user?.expenses);
+
     // updating investment contribution
     if (tempSummary.length) {
       setMySummary(data?.data?.user?.summary[0]);
+      setInvestment(data?.data?.user?.summary[0].investment_outflows);
+    } else {
+      setInvestment(0);
     }
-    // updating myAll expenses
-    setMyAllExpenses(data?.data?.user?.expenses);
+
+    // updating expense
+    setExpense(sm);
+
+    // updating salary
+    setSalary(data?.data?.user?.salaryAfterTax);
   };
 
   // to update savings
@@ -237,8 +238,10 @@ function MainPage() {
     };
 
     fetchUserbyId();
+  });
 
-    // Handle scroll button visibility
+  // Handle scroll button visibility
+  useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 300) {
         setShowButton(true);
@@ -278,28 +281,44 @@ function MainPage() {
           <div className="relative border-solid border-2 border-black rounded-lg">
             <input
               type="number"
-              className="w-36 h-8 rounded-md px-2 py-1  focus:outline-none"
+              className="w-32 h-8 rounded-md px-2  focus:outline-none"
               value={salary}
               onChange={handleSalaryChange}
               readOnly={!isEditable}
             />
             <button
-              className="absolute inset-y-0 right-0 px-2 py-0 bg-[#000] text-white rounded-r-md h-full"
+              className="absolute right-0 mt-0 bg-[#fff] text-white rounded-r-md h-full"
               onClick={() => {
                 setIsEditable(!isEditable);
               }}
             >
-              {isEditable ? "Save" : "Edit"}
+              {isEditable ? (
+                <img
+                  src="/images/save.png"
+                  alt="Save Button"
+                  style={{ width: "32px", height: "32px" }}
+                />
+              ) : (
+                <img
+                  src="/images/edit.png"
+                  alt="Edit Button"
+                  style={{ width: "32px", height: "32px" }}
+                />
+              )}
             </button>
           </div>
 
           <div className="relative border-solid border-2 border-black rounded-lg mx-4 bg-white">
-            <p className="w-32 ml-4 mr-4 py-1">{userName}</p>
+            <p className="w-28 ml-4 mr-4 py-1">{userName}</p>
             <button
               className="absolute inset-y-0 right-0 px-2 py-0 bg-[#FF3E58] text-white rounded-r-md h-full"
               onClick={handleLogout}
             >
-              Logout
+              <img
+                src="/images/logout.png"
+                alt="Edit Button"
+                style={{ width: "32px", height: "32px", marginTop: "0px" }}
+              />
             </button>
           </div>
         </div>
