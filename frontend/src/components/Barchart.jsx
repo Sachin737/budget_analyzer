@@ -5,11 +5,11 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 
 const BarChart = ({ data }) => {
   const options = {
+    hoverBackgroundColor: "#fff",
     plugins: {
       datalabels: {
         display: false,
       },
-
       legend: {
         display: true, // Show or hide the legend
         position: "top", // Change the position of the legend

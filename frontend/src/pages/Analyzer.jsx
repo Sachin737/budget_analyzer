@@ -110,7 +110,6 @@ const Analyzer = () => {
   };
 
   //////////////////// handle user logout //////////////////////////////////
-  const [logoutComplete, setLogoutComplete] = useState(false);
   const handleLogout = async () => {
     document.cookie = `token=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=${window.location.hostname};`;
 
@@ -122,12 +121,6 @@ const Analyzer = () => {
     navigate("/");
     window.location.reload();
   };
-  useEffect(() => {
-    if (logoutComplete) {
-      navigate("/");
-      window.location.reload();
-    }
-  }, [logoutComplete, navigate]);
 
   //////////////////// Page scroll to top function
   const scrollToTop = () => {
@@ -409,7 +402,7 @@ const Analyzer = () => {
 
       {/* Summary */}
       <div className="flex-wrap pt-16 flex flex-col md:flex-row items-center justify-center md:my-16">
-        <div className="bg-[#0F0F0F] rounded-lg p-4 shadow-md mb-4 w-full md:w-[40%] md:mr-8 md:mb-0 md:ml-8">
+        <div className="bg-[#0F0F0F] rounded-lg p-4 shadow-md mb-4 w-full md:w-[80%] md:mr-8 md:mb-0 md:ml-8">
           <MonthlySummary
             mySummary={mySummary}
             salary={salary}
