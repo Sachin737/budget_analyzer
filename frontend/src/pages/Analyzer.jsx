@@ -30,6 +30,7 @@ const Analyzer = () => {
   const [userName, setUserName] = useState("");
   const [salary, setSalary] = useState(0);
   const [userId, setUserId] = useState(0);
+  const [mySummary, setMySummary] = useState([]);
 
   // selected options in form
   const [selectedExpense, setSelectedExpense] = useState("");
@@ -41,15 +42,15 @@ const Analyzer = () => {
   // error message
   const [errorMessage, setErrorMessage] = useState("");
 
-  const [showButton, setShowButton] = useState(false); // goToTop button
+  // goToTop button
+  const [showButton, setShowButton] = useState(false);
 
   const navigate = useNavigate();
 
   // to Add new expense
   const handleAddExpense = async (event, name, amount) => {
     try {
-      // if (errorMessage.length > 0)
-      //   throw new Error("You can't exceed your balance!");
+      // console.log("analyzer:", setlectedDate);
 
       const { data } = await axios.post(
         `${process.env.REACT_APP_API}/api/v1/actualExpenses`,
@@ -58,7 +59,7 @@ const Analyzer = () => {
           noOfUnit: NoOfUnit,
           cost: selectedAmount,
           comments: comment,
-          purchagedAt: setlectedDate,
+          purchasedAt: setlectedDate,
           user: userId,
         },
         {
@@ -68,8 +69,6 @@ const Analyzer = () => {
         }
       );
       toast.success("Added successfully");
-
-      window.location.reload();
 
       // console.log(data);
     } catch (err) {
@@ -148,10 +147,8 @@ const Analyzer = () => {
     setNoOfUnit(NoOfUnit + 1);
   };
 
+  // Handle scroll button visibility
   useEffect(() => {
-    // console.log("analyzer: ",salary, expense, investment, userName, userId);
-
-    // Handle scroll button visibility
     const handleScroll = () => {
       if (window.scrollY > 300) {
         setShowButton(true);
@@ -166,6 +163,31 @@ const Analyzer = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   });
+
+  // to intialize monthly Summary data
+  useEffect(() => {
+    const fetchAllExpenses = async () => {
+      try {
+        const { data } = await axios.get(
+          `${process.env.REACT_APP_API}/api/v1/actualExpenses`,
+          {
+            headers: {
+              authorization: `Bearer ${auth.token}`,
+            },
+            params: {
+              user: userId,
+            },
+          }
+        );
+        // console.log(data);
+        setMySummary(data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchAllExpenses();
+  },[userId]);
 
   // to get userId, name and salary
   useEffect(() => {
@@ -185,7 +207,7 @@ const Analyzer = () => {
         // console.log(data.data.user);
         setUserName(data?.data?.user?.name);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
 
@@ -263,7 +285,7 @@ const Analyzer = () => {
       </nav>
 
       {/* MAIN CONTENT */}
-      <div className="mainContent pt-16 flex flex-col md:flex-row items-center justify-center md:my-16">
+      <div className="mainContent flex-wrap pt-16 flex flex-col md:flex-row items-center justify-center md:my-16">
         <div className="expenseAdder bg-[#0F0F0F] rounded-lg p-4 shadow-md mb-4 w-full md:w-[40%] md:mr-8 md:mb-0 md:ml-8">
           <h2 className="text-xl font-semibold text-[#EEEEEE] mb-4">
             Add Expense
@@ -386,7 +408,7 @@ const Analyzer = () => {
       {/* Summary */}
       <div className="pt-8 flex flex-col lg:flex-row items-center justify-center">
         <div className="md:w-full">
-          {/* <MonthlySummary mySummary={mySummary} salary={salary} /> */}
+          <MonthlySummary mySummary={mySummary} salary={salary} />
         </div>
         {/* <div className="md:w-full">
           <SummaryPieChart

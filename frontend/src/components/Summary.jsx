@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { BarChart,BarChartHorizontal } from "./Barchart";
+import { BarChart, BarChartHorizontal } from "./Barchart";
+import _, { update } from "lodash";
 
 const Summary = ({ mySummary, salary }) => {
   const [data, setData] = useState();
   const [labels, setLabels] = useState([]);
 
   useEffect(() => {
-    delete mySummary.id;
-    delete mySummary.user;
-    delete mySummary.__v;
-    delete mySummary._id;
+    if (!mySummary || salary === 0) return;
+
+    const updatedSummary = _.omit(mySummary, ["id", "user", "__v", "_id"]);
 
     // percentage calculation
-    const percentage = Object.values(mySummary).map((el) =>
+    const percentage = Object.values(updatedSummary).map((el) =>
       ((el / salary) * 100).toFixed(1)
     );
 
     // label for expense category
-    const labelValues = Object.keys(mySummary);
+    const labelValues = Object.keys(updatedSummary);
 
     // add savings
     let sm = 0;
@@ -58,35 +58,47 @@ const MonthlySummary = ({ mySummary, salary }) => {
   const [labels, setLabels] = useState([]);
 
   useEffect(() => {
-    delete mySummary.id;
-    delete mySummary.user;
-    delete mySummary.__v;
-    delete mySummary._id;
+    const updatedSummary = [];
 
-    // percentage calculation
-    const percentage = Object.values(mySummary).map((el) =>
-      ((el / salary) * 100).toFixed(1)
-    );
+    for (const x of mySummary?.data?.expenses || []) {
+      const dateObj = new Date(x.purchasedAt);
+      const month = dateObj.toLocaleString("default", { month: "long" });
+      const year = dateObj.getFullYear();
+
+      updatedSummary.push({
+        item: x.commodityName,
+        totalCost: x.cost,
+        month: month,
+        year: year,
+      });
+    }
+
+    console.log(updatedSummary);
 
     // label for expense category
-    const labelValues = Object.keys(mySummary);
-
-    // add savings
-    let sm = 0;
-    for (let i = 0; i < percentage.length; i += 1) {
-      sm += parseFloat(percentage[i]);
-    }
-    percentage.push(100 - sm);
-    labelValues.push("savings");
+    const labelValues = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
 
     setLabels(labelValues);
     setData({
       labels: labelValues,
       datasets: [
         {
-          label: "% of salary",
+          label: "expense (in ruppees)",
           backgroundColor: "green",
-          data: percentage,
+          // data: percentage,
           fill: false,
         },
       ],
@@ -105,4 +117,4 @@ const MonthlySummary = ({ mySummary, salary }) => {
   );
 };
 
-export {Summary, MonthlySummary};
+export { Summary, MonthlySummary };

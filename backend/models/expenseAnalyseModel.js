@@ -18,7 +18,7 @@ const expenseAnalyseSchema = new mongoose.Schema(
             // whether the purchage was beneficial or not!
             type: String,
         },
-        purchagedAt: {
+        purchasedAt: {
             type: Date,
             default: Date.now,
         },
@@ -37,14 +37,14 @@ const expenseAnalyseSchema = new mongoose.Schema(
 
 // pre-save middleware
 expenseAnalyseSchema.pre('save', function (next) {
-    if (!this.purchagedAt) {
+    if (!this.purchasedAt) {
         const currentDate = new Date();
         currentDate.setUTCHours(0, 0, 0, 0);
-        this.purchagedAt = currentDate;
+        this.purchasedAt = currentDate;
     } else {
-        const parsedDate = new Date(this.purchagedAt);
+        const parsedDate = new Date(this.purchasedAt);
         parsedDate.setUTCHours(0, 0, 0, 0);
-        this.purchagedAt = parsedDate;
+        this.purchasedAt = parsedDate;
     }
     next();
 });

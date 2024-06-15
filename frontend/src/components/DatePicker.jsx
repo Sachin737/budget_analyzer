@@ -7,9 +7,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 import { useState } from "react";
 
-const BasicDatePicker = () => {
-  const [value, setValue] = useState(dayjs("2022-04-17"));
-
+const BasicDatePicker = ({ setlectedDate, setSetlectedDate }) => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer
@@ -20,8 +18,11 @@ const BasicDatePicker = () => {
       >
         <DatePicker
           label="purchase date"
-          value={value}
-          onChange={(newValue) => setValue(newValue)}
+          value={setlectedDate}
+          onChange={(newValue) => {
+            console.log("New Date:", newValue);
+            setSetlectedDate(newValue);
+          }}
           sx={{
             "& .MuiInputBase-input": {
               color: "white",
@@ -60,4 +61,4 @@ const BasicDatePicker = () => {
   );
 };
 
-export default BasicDatePicker; 
+export default BasicDatePicker;

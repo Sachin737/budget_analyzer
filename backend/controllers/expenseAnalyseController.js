@@ -17,15 +17,17 @@ exports.getAllExpenseDetails = catchAsync(async (req, res, next) => {
 
 exports.addOrUpdateExpenseDetail = catchAsync(async (req, res, next) => {
     let currDate = new Date();
-    if (req.body.purchagedAt) {
-        currDate = new Date(req.body.purchagedAt);
+
+    if (req.body.purchasedAt) {
+        currDate = new Date(req.body.purchasedAt);
     }
     currDate.setUTCHours(0, 0, 0, 0);
 
+    // console.log("date:", currDate)
     let expense = await ExpenseAnalyse.findOneAndUpdate(
         {
             user: req.user?.id,
-            purchagedAt: currDate,
+            purchasedAt: currDate,
             commodityName: req.body?.commodityName,
         },
         {
