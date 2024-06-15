@@ -29,7 +29,7 @@ const Login = () => {
         });
 
         // Saving data in a cookie
-        document.cookie = `token=${data?.token}`;
+        document.cookie = `token=${data?.token}; path=/; domain=${window.location.hostname};`;
         // console.log(data?.token);
 
         toast.success("Login successfully");
@@ -44,12 +44,21 @@ const Login = () => {
     }
   };
 
+  const parseCookies = () => {
+    return document.cookie.split("; ").reduce((acc, cookie) => {
+      const [key, value] = cookie.split("=");
+      acc[decodeURIComponent(key)] = decodeURIComponent(value);
+      return acc;
+    }, {});
+  };
+
   useEffect(() => {
-    // console.log(auth.token);
-    if (auth.token) {
+    const cookie = parseCookies();
+
+    if (cookie.token) {
       navigate("/user");
     }
-  });
+  }, []);
 
   return (
     <div className="container1">

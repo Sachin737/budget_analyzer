@@ -118,6 +118,7 @@ const Analyzer = () => {
     });
 
     toast.success("Logout successfully");
+    
     navigate("/");
     window.location.reload();
   };
