@@ -52,7 +52,7 @@ function MainPage() {
   // selected options in form
   const [selectedExpense, setSelectedExpense] = useState("");
   const [selectedExpenseCategory, setSelectedExpenseCategory] = useState("");
-  const [selectedAmount, setSelectedAmount] = useState(0);
+  const [selectedAmount, setSelectedAmount] = useState();
 
   // error message
   const [errorMessage, setErrorMessage] = useState("");
@@ -184,10 +184,7 @@ function MainPage() {
 
   // handle user logout
   const handleLogout = async () => {
-    document.cookie = "token=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-    const { data } = await axios.post(
-      `${process.env.REACT_APP_API}/api/v1/users/logout`
-    );
+    document.cookie = `token=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/user; domain=${window.location.hostname};`;
 
     setAuth({
       token: "",
