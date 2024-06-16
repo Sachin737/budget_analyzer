@@ -129,6 +129,7 @@
   }
 }
 
+// Hamburger Menu CSS
 .sidenav {
   width: 280px;
   background: rgba(208, 187, 230, 0.195);
@@ -141,4 +142,52 @@
 
 .sidenav.visible {
   transform: translateX(0); /* Slide in */
+}
+
+// INFO CARD CSS
+.glassmorphic {
+  background: radial-gradient(at 50% 50%, #333333 0, transparent 60%),
+    radial-gradient(at 25% 75%, #404040 0, transparent 60%),
+    radial-gradient(at 80% 30%, #2d2d2d 0, transparent 55%),
+    radial-gradient(at 10% 90%, #363636 0, transparent 55%),
+    radial-gradient(at 70% 40%, #292929 0, transparent 55%),
+    radial-gradient(at 90% 80%, #212121 0, transparent 55%),
+    radial-gradient(at 40% 60%, #373737 0, transparent 50%);
+  background-color: #1a1a1a;
+
+  border-radius: 16px;
+  box-shadow: 4px 4px 24px rgba(96, 18, 222, 0.417);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(115, 115, 115, 0.417);
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-text {
+  font-size: small;
+  font-family: monospace;
+  visibility: hidden;
+  width: 180px;
+  background-color: #a4a4a4;
+  color: #000000;
+  text-align: center;
+  border-radius: 6px;
+  padding: 6px 12px;
+  position: absolute;
+  z-index: 1;
+  bottom: calc(100% + 5px); /* Adjust the gap between h1 and tooltip */
+  left: 50%;
+  bottom: 80%;
+  transform: translateX(0%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
 }

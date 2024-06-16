@@ -234,7 +234,7 @@ const Analyzer = () => {
         <div className="flex items-center justify-between w-full">
           <div className="flex items-center">
             <h1 className="text-2xl font-semibold text-white">
-              Budget Planner
+              Budget Analyzer
             </h1>
           </div>
           <div className="flex items-center ml-auto">
@@ -287,7 +287,7 @@ const Analyzer = () => {
       </nav>
 
       {/* MAIN CONTENT */}
-      <div className="mainContent flex-wrap pt-16 flex flex-col md:flex-row items-center justify-center md:my-16">
+      <div className="mainContent flex-wrap pt-16 flex flex-col gap-24 md:flex-row items-center justify-center md:my-16">
         <div className="expenseAdder bg-[#0F0F0F] rounded-lg p-4 shadow-md mb-4 w-full md:w-[40%] md:mr-8 md:mb-0 md:ml-8">
           <h2 className="text-xl font-semibold text-[#EEEEEE] mb-4">
             Add Expense
@@ -402,9 +402,76 @@ const Analyzer = () => {
           </button>
         </div>
 
-        <div className="w-full md:w-[40%] md:mr-8 md:mb-0 md:ml-8">
-          <img src="/images/analyzer.png" alt="budget analyzer image" />
+        {/* INFO card */}
+        <div className="glassmorphic flex flex-col gap-2 justify-around rounded-lg p-6 text-white shadow-md mb-4 w-full md:w-[24%] md:mr-8 md:mb-0 md:ml-8 h-52 backdrop-filter backdrop-blur-lg bg-opacity-30 bg-white border border-white/10">
+          <div className="flex justify-between w-full p-2 rounded-lg relative">
+            <div className="flex items-center">
+              <h1 className="font-bold text-sm">Inflation</h1>
+              <div className="tooltip">
+                <img
+                  src="/images/info.png"
+                  alt="info"
+                  className="ml-2 w-3 h-3"
+                />
+                <span className="tooltip-text">
+                  Always keep inflation in mind when planning your budget.
+                  <a
+                    target="_blank"
+                    href="https://www.investopedia.com/articles/insights/122016/9-common-effects-inflation.asp"
+                  >
+                    <span className="text-[#0000ba]">Learn more.</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+            <span>0.52 %</span>
+          </div>
+
+          <div className="flex justify-between w-full p-2 rounded-lg relative">
+            <div className="flex items-center">
+              <h1 className="font-bold text-sm">Emergency fund</h1>
+              <div className="tooltip">
+                <img
+                  src="/images/info.png"
+                  alt="info"
+                  className="ml-2 w-3 h-3"
+                />
+                <span className="tooltip-text">
+                  emergency fund should be at least 6 times of your monthly
+                  salary.
+                  <a
+                    target="_blank"
+                    href="https://www.investopedia.com/terms/e/emergency_fund.asp"
+                  >
+                    <span className="text-[#0000ba]">Learn more.</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+            <span>₹{salary / 2}</span>
+          </div>
+
+          <div className="flex justify-between w-full p-2 rounded-lg relative">
+            <div className="flex items-center">
+              <h1 className="font-bold text-sm">Insurance</h1>
+              <div className="tooltip">
+                <img
+                  src="/images/info.png"
+                  alt="info"
+                  className="ml-2 w-3 h-3"
+                />
+                <span className="tooltip-text">
+                  Additional information about Inflation.
+                </span>
+              </div>
+            </div>
+            <span>₹ xxx</span>
+          </div>
         </div>
+
+        {/* <div className="w-full md:w-[40%] md:mr-8 md:mb-0 md:ml-8">
+          <img src="/images/analyzer.png" alt="budget analyzer image" />
+        </div> */}
       </div>
 
       {/* Summary */}

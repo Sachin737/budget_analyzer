@@ -6,6 +6,7 @@ import PrivateRoute from "./components/Routes/Private";
 import NotFoundPage from "./pages/NotFoundPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Toaster } from 'react-hot-toast';
+import "./style.scss";
 
 function App() {
     return (
