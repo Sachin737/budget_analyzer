@@ -45,7 +45,7 @@ const SideNav = () => {
         <button id="close-btn" className="btn btn-danger absolute top-4 right-4">
           <img src="/images/close1.png" width={32} alt="" />
         </button>
-        <ul className="sidenav-menu text-[#dedeff] mt-16 ml-20">
+        <ul className="sidenav-menu text-[#dedeff] mt-16 ml-10">
           <li className="sidenav-item">
             <ul className="sidenav-collapse flex flex-col gap-4">
               <li className="sidenav-item">

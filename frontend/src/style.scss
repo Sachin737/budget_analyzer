@@ -131,13 +131,16 @@
 
 // Hamburger Menu CSS
 .sidenav {
+  font-family: monospace;
+  font-weight: 800;
+  font-size:x-large;
   width: 280px;
-  background: rgba(208, 187, 230, 0.195);
+  background: rgba(20, 20, 20, 0.663);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(4.9px);
   -webkit-backdrop-filter: blur(4.9px);
   transform: translateX(-280px); /* Start offscreen */
-  transition: transform 0.3s ease-in-out; /* Smooth transition */
+  transition: transform 0.5s ease-in-out; /* Smooth transition */
 }
 
 .sidenav.visible {
