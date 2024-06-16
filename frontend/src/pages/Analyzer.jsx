@@ -18,6 +18,7 @@ import {
   expenseMapping,
 } from "../defaultData/inputFieldData";
 import toast from "react-hot-toast";
+import SideNav from "../components/HamburgerMenu";
 
 const Analyzer = () => {
   // to edit salary
@@ -118,7 +119,7 @@ const Analyzer = () => {
     });
 
     toast.success("Logout successfully");
-    
+
     navigate("/");
     window.location.reload();
   };
@@ -229,53 +230,58 @@ const Analyzer = () => {
     <div className="container mx-auto min-h-screen bg-[#000] px-4 py-8 rounded-lg shadow-md">
       {/* NAVBAR */}
       <nav className="flex items-center justify-between mb-4 bg-[#4D3C77] bg-opacity-80 fixed top-0 left-0 right-0 z-10 px-4 py-2">
-        <h1 className="text-2xl font-semibold text-white">Budget Planner</h1>
-        <div className="flex items-center">
-          <h3 className="text-sm font-semibold text-white mr-2 mr-1">
-            Salary :
-          </h3>
-          <div className="relative border-solid border-2 border-black rounded-lg">
-            <input
-              type="number"
-              className="w-32 h-8 rounded-md px-2  focus:outline-none"
-              value={salary}
-              onChange={handleSalaryChange}
-              readOnly={!isEditable}
-            />
-            <button
-              className="absolute right-0 mt-0 bg-[#fff] text-white rounded-r-md h-full"
-              onClick={() => {
-                setIsEditable(!isEditable);
-              }}
-            >
-              {isEditable ? (
-                <img
-                  src="/images/save.png"
-                  alt="Save Button"
-                  style={{ width: "32px", height: "32px" }}
-                />
-              ) : (
-                <img
-                  src="/images/edit.png"
-                  alt="Edit Button"
-                  style={{ width: "32px", height: "32px" }}
-                />
-              )}
-            </button>
+        <SideNav />
+        <div className="flex items-center justify-between w-full">
+          <div className="flex items-center">
+            <h1 className="text-2xl font-semibold text-white">
+              Budget Planner
+            </h1>
           </div>
-
-          <div className="relative border-solid border-2 border-black rounded-lg mx-4 bg-white">
-            <p className="w-28 ml-4 mr-4 py-1">{userName}</p>
-            <button
-              className="absolute inset-y-0 right-0 px-2 py-0 bg-[#FF3E58] text-white rounded-r-md h-full"
-              onClick={handleLogout}
-            >
-              <img
-                src="/images/logout.png"
-                alt="Edit Button"
-                style={{ width: "32px", height: "32px", marginTop: "0px" }}
+          <div className="flex items-center ml-auto">
+            <h3 className="text-sm font-semibold text-white mr-2">Salary :</h3>
+            <div className="relative border-solid border-2 border-black rounded-lg">
+              <input
+                type="number"
+                className="w-32 h-8 rounded-md px-2 focus:outline-none"
+                value={salary}
+                onChange={handleSalaryChange}
+                readOnly={!isEditable}
               />
-            </button>
+              <button
+                className="absolute right-0 mt-0 bg-[#fff] text-white rounded-r-md h-full"
+                onClick={() => {
+                  setIsEditable(!isEditable);
+                }}
+              >
+                {isEditable ? (
+                  <img
+                    src="/images/save.png"
+                    alt="Save Button"
+                    style={{ width: "32px", height: "32px" }}
+                  />
+                ) : (
+                  <img
+                    src="/images/edit.png"
+                    alt="Edit Button"
+                    style={{ width: "32px", height: "32px" }}
+                  />
+                )}
+              </button>
+            </div>
+
+            <div className="relative border-solid border-2 border-black rounded-lg mx-4 bg-white">
+              <p className="w-28 ml-4 mr-4 py-1">{userName}</p>
+              <button
+                className="absolute inset-y-0 right-0 px-2 py-0 bg-[#FF3E58] text-white rounded-r-md h-full"
+                onClick={handleLogout}
+              >
+                <img
+                  src="/images/logout.png"
+                  alt="Edit Button"
+                  style={{ width: "32px", height: "32px", marginTop: "0px" }}
+                />
+              </button>
+            </div>
           </div>
         </div>
       </nav>
