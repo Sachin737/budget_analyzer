@@ -83,7 +83,7 @@ const MyExpenses = ({ myAllExpenses, userSalary }) => {
                   </td>
                   <td className="px-6 py-4">{12 * ele.monthly}</td>
                   <td className="px-6 py-4 bg-gray-50 dark:bg-gray-800">
-                    {((12 * ele.monthly) / userSalary) * 100}
+                    {(((12 * ele.monthly) / userSalary) * 100).toPrecision(3)}
                   </td>
                 </tr>
               ))}
