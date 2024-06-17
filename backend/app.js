@@ -9,6 +9,7 @@ const userRouter = require('./routes/userRoutes');
 const expenseRouter = require('./routes/expenseRoutes');
 const summaryRouter = require('./routes/summaryRoutes');
 const ExpenseAnalyseRouter = require('./routes/expenseAnalyseRoutes');
+const inflationData = require("./routes/InflationRoutes")
 
 const app = express();
 
@@ -42,6 +43,7 @@ app.use('/api/v1/users', userRouter);
 app.use('/api/v1/expenses', expenseRouter);
 app.use('/api/v1/summaries', summaryRouter);
 app.use('/api/v1/actualExpenses', ExpenseAnalyseRouter);
+app.use('/api/v1/data', inflationData);
 
 // UNHANDLED ROUTES
 app.all('*', (req, res, next) => {
