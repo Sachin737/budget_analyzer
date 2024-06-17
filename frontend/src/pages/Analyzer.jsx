@@ -4,7 +4,6 @@ import { useEffect, useState, useContext, useCallback, useId } from "react";
 import axios from "axios";
 import { AuthContext } from "../Context/auth";
 
-import MyExpenses from "../components/MyExpenses";
 import { MonthlySummary } from "../components/Summary";
 import SummaryPieChart from "../components/SummaryPieChart";
 import { jwtDecode } from "jwt-decode";
@@ -19,6 +18,7 @@ import {
 } from "../defaultData/inputFieldData";
 import toast from "react-hot-toast";
 import SideNav from "../components/HamburgerMenu";
+import { MyExpensesInAnalyzer } from "../components/MyExpenses";
 
 const Analyzer = () => {
   // to edit salary
@@ -32,6 +32,9 @@ const Analyzer = () => {
   const [salary, setSalary] = useState(0);
   const [userId, setUserId] = useState(0);
   const [mySummary, setMySummary] = useState([]);
+  const [healthInsurance, setHealthInsurance] = useState();
+  const [TermInsurance, setTermInsurance] = useState();
+  const [myAllExpenses, setMyAllExpenses] = useState();
 
   // selected options in form
   const [selectedExpense, setSelectedExpense] = useState("");
@@ -179,7 +182,7 @@ const Analyzer = () => {
         // console.log(data);
         setMySummary(data);
       } catch (err) {
-        console.error(err);
+        // console.error(err);
       }
     };
 
@@ -201,8 +204,18 @@ const Analyzer = () => {
 
         setSalary(data?.data?.user?.salaryAfterTax);
 
-        // console.log(data.data.user);
         setUserName(data?.data?.user?.name);
+
+        // SET INSURANCE
+        Object.entries(data?.data?.user?.expenses).forEach(([key, value]) => {
+          // console.log(value);
+          if (value.item === "health-insurance") {
+            setHealthInsurance(value.monthly * 12);
+          }
+          if (value.item === "term-insurance") {
+            setTermInsurance(value.monthly * 12);
+          }
+        });
       } catch (err) {
         // console.log(err);
       }
@@ -224,7 +237,32 @@ const Analyzer = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  });
+  }, []);
+
+  // Fetch all expenses
+  useEffect(() => {
+    const fetchExpenses = async () => {
+      try {
+        const { data } = await axios.get(
+          `${process.env.REACT_APP_API}/api/v1/actualExpenses`,
+          {
+            headers: {
+              authorization: `Bearer ${auth?.token}`,
+            },
+            params: {
+              user: userId,
+            },
+          }
+        );
+        console.log(data?.data?.expenses[0]);
+        setMyAllExpenses(data?.data?.expenses);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchExpenses();
+  }, []);
 
   return (
     <div className="container mx-auto min-h-screen bg-[#000] px-4 py-8 rounded-lg shadow-md">
@@ -233,7 +271,8 @@ const Analyzer = () => {
         <SideNav />
         <div className="flex items-center justify-between w-full">
           <div className="flex items-center">
-            <h1 className="text-2xl font-semibold text-white">
+            <img src="/images/mainIcon.png" width={32} alt="" />
+            <h1 className="text-2xl font-semibold text-white ml-4">
               Budget Analyzer
             </h1>
           </div>
@@ -403,7 +442,7 @@ const Analyzer = () => {
         </div>
 
         {/* INFO card */}
-        <div className="glassmorphic flex flex-col gap-2 justify-around rounded-lg p-6 text-white shadow-md mb-4 w-full md:w-[24%] md:mr-8 md:mb-0 md:ml-8 h-52 backdrop-filter backdrop-blur-lg bg-opacity-30 bg-white border border-white/10">
+        <div className="glassmorphic flex flex-col gap-1 justify-around rounded-lg p-4 text-white shadow-md mb-4 w-full md:w-[24%] md:mr-8 md:mb-0 md:ml-8 h-52 backdrop-filter backdrop-blur-lg bg-opacity-30 bg-white border border-white/10">
           <div className="flex justify-between w-full p-2 rounded-lg relative">
             <div className="flex items-center">
               <h1 className="font-bold text-sm">Inflation</h1>
@@ -429,7 +468,7 @@ const Analyzer = () => {
 
           <div className="flex justify-between w-full p-2 rounded-lg relative">
             <div className="flex items-center">
-              <h1 className="font-bold text-sm">Emergency fund</h1>
+              <h1 className="font-bold text-sm">Emergency fund (suggested)</h1>
               <div className="tooltip">
                 <img
                   src="/images/info.png"
@@ -437,7 +476,7 @@ const Analyzer = () => {
                   className="ml-2 w-3 h-3"
                 />
                 <span className="tooltip-text">
-                  emergency fund should be at least 6 times of your monthly
+                  Emergency fund should be at least 6 times of your monthly
                   salary.
                   <a
                     target="_blank"
@@ -453,7 +492,7 @@ const Analyzer = () => {
 
           <div className="flex justify-between w-full p-2 rounded-lg relative">
             <div className="flex items-center">
-              <h1 className="font-bold text-sm">Insurance</h1>
+              <h1 className="font-bold text-sm">Health Insurance</h1>
               <div className="tooltip">
                 <img
                   src="/images/info.png"
@@ -461,22 +500,50 @@ const Analyzer = () => {
                   className="ml-2 w-3 h-3"
                 />
                 <span className="tooltip-text">
-                  Additional information about Inflation.
+                  Ideal health insurance should be 200 times room rent in
+                  hospital.{" "}
+                  <a
+                    target="_blank"
+                    href="https://www.investopedia.com/terms/h/healthinsurance.asp"
+                  >
+                    <span className="text-[#0000ba]">Learn more.</span>
+                  </a>
                 </span>
               </div>
             </div>
-            <span>₹ xxx</span>
+            <span>₹ {healthInsurance}</span>
+          </div>
+
+          <div className="flex justify-between w-full p-2 rounded-lg relative">
+            <div className="flex items-center">
+              <h1 className="font-bold text-sm">Term Insurance</h1>
+              <div className="tooltip">
+                <img
+                  src="/images/info.png"
+                  alt="info"
+                  className="ml-2 w-3 h-3"
+                />
+                <span className="tooltip-text">
+                  Term insurance is not market-linked and provides pure
+                  protection. Ideally, coverage should range between 10 to 15
+                  times your annual salary{" "}
+                  <a
+                    target="_blank"
+                    href="https://www.investopedia.com/terms/t/termlife.asp"
+                  >
+                    <span className="text-[#0000ba]">Learn more.</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+            <span>₹ {TermInsurance}</span>
           </div>
         </div>
-
-        {/* <div className="w-full md:w-[40%] md:mr-8 md:mb-0 md:ml-8">
-          <img src="/images/analyzer.png" alt="budget analyzer image" />
-        </div> */}
       </div>
 
       {/* Summary */}
       <div className="flex-wrap pt-16 flex flex-col md:flex-row items-center justify-center md:my-16">
-        <div className="bg-[#0F0F0F] rounded-lg p-4 shadow-md mb-4 w-full md:w-[80%] md:mr-8 md:mb-0 md:ml-8">
+        <div className="bg-[#0F0F0F] rounded-lg p-4 shadow-md mb-4 w-full md:w-[100%] md:mr-8 md:mb-0 md:ml-8">
           <MonthlySummary
             mySummary={mySummary}
             salary={salary}
@@ -485,6 +552,24 @@ const Analyzer = () => {
           />
         </div>
       </div>
+
+      {/* MY ALL EXPENSE COMPONENT */}
+      {myAllExpenses && (
+        <MyExpensesInAnalyzer
+          myAllExpenses={myAllExpenses}
+          userSalary={salary}
+        />
+      )}
+
+      {/* SCROLL TO TOP BUTTON */}
+      {showButton && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-5 right-6 bg-neutral-50 bg-opacity-80 p-3 rounded-full shadow-lg"
+        >
+          <img src="/images/top.png" height={16} width={16} />
+        </button>
+      )}
     </div>
   );
 };

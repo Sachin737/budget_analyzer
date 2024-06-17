@@ -11,15 +11,25 @@ const PrivateRoute = () => {
   const navigate = useNavigate();
 
   // //console.log(auth.user);
+  const parseCookies = () => {
+    return document.cookie.split("; ").reduce((acc, cookie) => {
+      const [key, value] = cookie.split("=");
+      acc[decodeURIComponent(key)] = decodeURIComponent(value);
+      return acc;
+    }, {});
+  };
 
   useEffect(() => {
+
+    const cookie = parseCookies();
+
     const checkUser = async () => {
 
       const res = await axios.get(
         `${process.env.REACT_APP_API}/api/v1/users/user-auth`,
         {
           headers: {
-            authorization: `Bearer ${auth?.token}`,
+            authorization: `Bearer ${cookie.token}`,
           }
         }
       );

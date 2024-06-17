@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BarChart, BarChartHorizontal } from "./Barchart";
-import _, { update } from "lodash";
+import _ from "lodash";
 
 const Summary = ({ mySummary, salary }) => {
   const [data, setData] = useState();

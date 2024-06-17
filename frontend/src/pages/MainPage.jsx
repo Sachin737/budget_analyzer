@@ -4,7 +4,7 @@ import { useEffect, useState, useContext, useCallback, useId } from "react";
 import axios from "axios";
 import { AuthContext } from "../Context/auth";
 
-import MyExpenses from "../components/MyExpenses";
+import { MyExpenses } from "../components/MyExpenses";
 import { Summary } from "../components/Summary";
 import SummaryPieChart from "../components/SummaryPieChart";
 import { jwtDecode } from "jwt-decode";
@@ -280,7 +280,8 @@ function MainPage() {
         <SideNav />
         <div className="flex items-center justify-between w-full">
           <div className="flex items-center">
-            <h1 className="text-2xl font-semibold text-white">
+            <img src="/images/mainIcon.png" width={32} alt="" />
+            <h1 className="text-2xl font-semibold text-white ml-4">
               Budget Planner
             </h1>
           </div>
@@ -335,7 +336,7 @@ function MainPage() {
 
       {/* MAIN CONTENT */}
       <div className="mainContent pt-16 flex flex-col md:flex-row items-center justify-center md:my-16">
-        <div className="expenseAdder bg-[#0F0F0F] rounded-lg p-4 shadow-md mb-4 w-full md:w-[40%] md:mr-8 md:mb-0 md:ml-8">
+        <div className="expenseAdder bg-[#0F0F0F] rounded-lg p-4 shadow-md mb-4 w-full md:w-[40%] md:mr-12 md:mb-0 md:ml-8">
           <h2 className="text-xl font-semibold text-[#EEEEEE] mb-4">
             Add Expense
           </h2>
@@ -397,7 +398,7 @@ function MainPage() {
           </button>
         </div>
 
-        <div className="w-full md:w-[40%] md:mr-8 md:mb-0 md:ml-8">
+        <div className="w-full md:w-[40%] md:mr-8 md:mb-0 md:ml-12">
           <img src="/images/mainpage.png" alt="budget planner image" />
         </div>
       </div>

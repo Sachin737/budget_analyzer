@@ -19,7 +19,7 @@ const AuthProvider = (props) => {
   useEffect(() => {
     // Retrieve token from cookies
     const cookies = parseCookies();
-    const token = cookies.token; // Adjust the cookie name as needed
+    const token = cookies?.token; // Adjust the cookie name as needed
     
     // console.log(cookies)
 
