@@ -28,8 +28,8 @@ const MyExpenses = ({ myAllExpenses, userSalary }) => {
   }, [myAllExpenses]);
 
   return (
-    <div className="bg-[#0F0F0F] p-4 shadow-md mt-8 md:ml-8 md:mr-8 rounded-lg overflow-hidden">
-      <div className="flex flex-col md:flex-row justify-between items-center mb-4">
+    <div className="bg-[#0F0F0F] p-4 shadow-md mt-8 lg:ml-16 lg:mr-16  rounded-lg overflow-hidden">
+      <div className="flex flex-col lg:flex-row justify-between items-center mb-8">
         <h2 className="text-xl font-semibold text-[#EEEEEE] mb-2 md:mb-0">
           All Expenses
         </h2>
@@ -153,7 +153,7 @@ const MyExpensesInAnalyzer = ({ myAllExpenses, userSalary }) => {
       const month = dateObj.toLocaleString("default", { month: "long" });
       const year = dateObj.getFullYear();
 
-      console.log(year);
+      // console.log(year);
       setYearList((prevYearList) => [...prevYearList, year]);
 
       tmpObj.push({
@@ -167,7 +167,7 @@ const MyExpensesInAnalyzer = ({ myAllExpenses, userSalary }) => {
 
     setFilteredExpenses(tmpObj);
 
-    console.log(yearList);
+    // console.log(yearList);
   }, []);
 
   const handleYearChange = (event) => {
@@ -180,8 +180,8 @@ const MyExpensesInAnalyzer = ({ myAllExpenses, userSalary }) => {
   };
 
   return (
-    <div className="bg-[#0F0F0F] p-4 shadow-md mt-8 md:ml-8 md:mr-8 rounded-lg overflow-hidden">
-      <div className="flex flex-col md:flex-row justify-between items-center mb-4">
+    <div className="bg-[#0F0F0F] p-4 shadow-md mt-8 lg:ml-16 lg:mr-16  rounded-lg overflow-hidden">
+      <div className="flex flex-col lg:flex-row justify-between items-center mb-8">
         <h2 className="text-xl font-semibold text-[#EEEEEE] mb-2 md:mb-0">
           All Expenses
         </h2>

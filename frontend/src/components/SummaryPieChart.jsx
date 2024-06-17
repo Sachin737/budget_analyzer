@@ -10,8 +10,8 @@ const SummaryPieChart = ({ salary, setSalary, investment, expense }) => {
   }, [salary, investment, expense, saving]);
 
   return (
-    <div className="flex flex-col md:flex-row justify-center items-center gap-4">
-      <div className="flex-grow md:w-[60%] bg-[#0F0F0F] rounded-lg p-4 shadow-md m-4 overflow-x-auto">
+    <div className="flex flex-col md:flex-row justify-center items-center">
+      <div className="h-[50vh] flex-grow lg:w-[60%] bg-[#0F0F0F] rounded-lg p-4 shadow-md overflow-x-auto">
         <div className="flex flex-row items-center justify-around">
           <h2 className="text-xl font-semibold text-[#EEEEEE] mb-4">Summary</h2>
         </div>
@@ -43,7 +43,7 @@ const SummaryPieChart = ({ salary, setSalary, investment, expense }) => {
               startAngle: -90,
               endAngle: 360,
               cx: 200,
-              cy: 150,
+              cy: 180,
             },
           ]}
           slotProps={{
@@ -52,14 +52,14 @@ const SummaryPieChart = ({ salary, setSalary, investment, expense }) => {
               position: { vertical: "middle", horizontal: "right" },
               padding: 0,
               labelStyle: {
-                fontSize: 14,
+                fontSize: 18,
                 fill: "white",
               },
 
               itemMarkWidth: 20,
               itemMarkHeight: 2,
               markGap: 5,
-              itemGap: 10,
+              itemGap: 12,
             },
           }}
         />

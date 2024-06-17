@@ -39,7 +39,7 @@ const BarChart = ({ data }) => {
   // Chart.register(ChartDataLabels);
 
   return (
-    <div>
+    <div style={{ width: "100%", height: "90%" }}>
       <Bar data={data} options={options} />
     </div>
   );
@@ -85,7 +85,7 @@ const BarChartHorizontal = ({ data }) => {
   // Chart.register(ChartDataLabels);
 
   return (
-    <div style={{ position: "relative", height: "60vh" }}>
+    <div style={{ position: "relative", height: "60vh", width: "100%" }}>
       <Bar data={data} options={options} />
     </div>
   );

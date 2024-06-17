@@ -274,29 +274,31 @@ function MainPage() {
   }, [userId]);
 
   return (
-    <div className="container mx-auto min-h-screen bg-[#000] px-4 py-8 rounded-lg shadow-md">
+    <div className="mx-auto min-h-screen px-8 py-4 rounded-lg">
       {/* NAVBAR */}
-      <nav className="flex items-center justify-between mb-4 bg-[#4D3C77] bg-opacity-80 fixed top-0 left-0 right-0 z-10 px-4 py-2">
+      <nav className="flex items-center justify-between mb-4 w-[100%] top-0 left-0 right-0 z-10 px-4 py-6">
         <SideNav />
         <div className="flex items-center justify-between w-full">
           <div className="flex items-center">
             <img src="/images/mainIcon.png" width={32} alt="" />
-            <h1 className="text-2xl font-semibold text-white ml-4">
+            <h1 className="text-4xl font-semibold text-[#f9ae65] ml-4">
               Budget Planner
             </h1>
           </div>
           <div className="flex items-center ml-auto">
-            <h3 className="text-sm font-semibold text-white mr-2">Salary :</h3>
-            <div className="relative border-solid border-2 border-black rounded-lg">
+            <h3 className="text-lg font-semibold text-[#3c6d79] mr-2">
+              Salary :
+            </h3>
+            <div className="relative rounded-lg">
               <input
                 type="number"
-                className="w-32 h-8 rounded-md px-2 focus:outline-none"
+                className="w-32 rounded-md px-2 py-2 focus:outline-none"
                 value={salary}
                 onChange={handleSalaryChange}
                 readOnly={!isEditable}
               />
               <button
-                className="absolute right-0 mt-0 bg-[#fff] text-white rounded-r-md h-full"
+                className="absolute right-0 top-[-1px] bg-[#fff] text-white rounded-r-md h-full"
                 onClick={() => {
                   setIsEditable(!isEditable);
                 }}
@@ -305,20 +307,20 @@ function MainPage() {
                   <img
                     src="/images/save.png"
                     alt="Save Button"
-                    style={{ width: "32px", height: "32px" }}
+                    style={{ width: "42px", height: "42px" }}
                   />
                 ) : (
                   <img
                     src="/images/edit.png"
                     alt="Edit Button"
-                    style={{ width: "32px", height: "32px" }}
+                    style={{ width: "42px", height: "42px" }}
                   />
                 )}
               </button>
             </div>
 
-            <div className="relative border-solid border-2 border-black rounded-lg mx-4 bg-white">
-              <p className="w-28 ml-4 mr-4 py-1">{userName}</p>
+            <div className="relative rounded-lg mx-4 bg-white">
+              <p className="w-28 ml-4 mr-4 py-2">{userName}</p>
               <button
                 className="absolute inset-y-0 right-0 px-2 py-0 bg-[#FF3E58] text-white rounded-r-md h-full"
                 onClick={handleLogout}
@@ -335,8 +337,12 @@ function MainPage() {
       </nav>
 
       {/* MAIN CONTENT */}
-      <div className="mainContent pt-16 flex flex-col md:flex-row items-center justify-center md:my-16">
-        <div className="expenseAdder bg-[#0F0F0F] rounded-lg p-4 shadow-md mb-4 w-full md:w-[40%] md:mr-12 md:mb-0 md:ml-8">
+      <div className="mainContent pt-16 flex flex-col md:flex-row gap-42 lg:gap-72 items-center justify-center lg:my-[20vh]">
+        <div className="w-[32vw]">
+          <img src="/images/mainpage.png" alt="budget planner image" />
+        </div>
+
+        <div className="expenseAdder bg-[#0F0F0F] rounded-lg p-8 shadow-md w-[36vw]">
           <h2 className="text-xl font-semibold text-[#EEEEEE] mb-4">
             Add Expense
           </h2>
@@ -387,7 +393,7 @@ function MainPage() {
 
           <button
             onClick={() => handleAddExpense(selectedExpense, selectedAmount)} // Example values, replace with actual data input
-            className="mt-4 px-4 py-2 bg-[#4D3C77] text-white rounded-md block w-full"
+            className="mt-4 px-4 py-2 bg-[#3c6d79] text-white rounded-md block w-full"
             disable={(
               selectedExpense == null ||
               selectedAmount == null ||
@@ -397,18 +403,14 @@ function MainPage() {
             Add
           </button>
         </div>
-
-        <div className="w-full md:w-[40%] md:mr-8 md:mb-0 md:ml-12">
-          <img src="/images/mainpage.png" alt="budget planner image" />
-        </div>
       </div>
 
       {/* Summary */}
-      <div className="pt-8 flex flex-col lg:flex-row items-center justify-center">
-        <div className="md:w-full">
+      <div className="flex flex-col lg:flex-row items-center justify-around my-16">
+        <div className="md:w-[40vw]">
           <Summary mySummary={mySummary} salary={salary} />
         </div>
-        <div className="md:w-full">
+        <div className="md:w-[40vw]">
           <SummaryPieChart
             salary={salary}
             setSalary={setSalary}
@@ -432,6 +434,12 @@ function MainPage() {
           <img src="/images/top.png" height={16} width={16} />
         </button>
       )}
+{/* 
+      <footer className="bg-[#f9ae65] text-dark py-4 mt-8">
+        <div className="container mx-auto px-4 text-center">
+          <p>&copy; 2024 Budget Planner. All rights reserved.</p>
+        </div>
+      </footer> */}
     </div>
   );
 }

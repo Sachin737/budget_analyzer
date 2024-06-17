@@ -1,7 +1,6 @@
 // Styling for login and sign up pages
 
 .container1 {
-  background-color: #4d4268;
 
   height: 100vh;
   display: flex;
@@ -16,20 +15,20 @@
     justify-content: center;
 
     background-color: rgb(241, 241, 241);
-    opacity: 0.8;
+    opacity: 1;
     border-radius: 10px;
     gap: 20px;
 
     padding: 20px 60px;
 
     .logo {
-      color: #4d4268;
+      color: #3c6d79;
       font-weight: bold;
       font-size: 32px;
     }
 
     .title {
-      color: #4d4268;
+      color: #3c6d79;
       font-size: 16px;
     }
 
@@ -45,7 +44,7 @@
         padding: 6px 20px;
         border: none;
         outline: none;
-        border-bottom: 1px solid #756fc9;
+        border-bottom: 1px solid #3c6d79;
 
         &::placeholder {
           font-size: 15px;
@@ -134,9 +133,10 @@
 .sidenav {
   font-family: monospace;
   font-weight: 800;
+  z-index: 1;
   font-size:x-large;
   width: 280px;
-  background: rgba(20, 20, 20, 0.881);
+  background: #E0E2EE;
   box-shadow: 0 4px 30px rgb(0, 0, 0);
   backdrop-filter: blur(4.9px);
   -webkit-backdrop-filter: blur(4.9px);
@@ -151,19 +151,15 @@
 // INFO CARD CSS
 .glassmorphic {
   background: radial-gradient(at 50% 50%, #333333 0, transparent 60%),
-    radial-gradient(at 25% 75%, #404040 0, transparent 60%),
+    radial-gradient(at 25% 75%, #000 0, transparent 60%),
     radial-gradient(at 80% 30%, #2d2d2d 0, transparent 55%),
-    radial-gradient(at 10% 90%, #363636 0, transparent 55%),
-    radial-gradient(at 70% 40%, #292929 0, transparent 55%),
+    radial-gradient(at 10% 90%, #000 0, transparent 55%),
+    radial-gradient(at 70% 40%, #000 0, transparent 55%),
     radial-gradient(at 90% 80%, #212121 0, transparent 55%),
-    radial-gradient(at 40% 60%, #373737 0, transparent 50%);
+    radial-gradient(at 40% 60%, #000 0, transparent 50%);
   background-color: #1a1a1a;
 
   border-radius: 16px;
-  box-shadow: 4px 4px 24px rgba(96, 18, 222, 0.417);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  border: 1px solid rgba(115, 115, 115, 0.417);
 }
 
 .tooltip {

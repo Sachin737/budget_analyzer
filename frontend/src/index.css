@@ -1,27 +1,23 @@
-body {
-  background-color: #000;
+body, html {
+  background: linear-gradient(to right, #3c6d79 50%, #E0E2EE 50%);
   margin: 0;
-  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  width: 100vw;
+  height: 100%;
+  overflow-x: hidden;
 }
 
-html, body {
-  margin: 0;
-  padding: 0;
+#root {
   width: 100%;
   height: 100%;
-}
-
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
 }
 
 * {
   box-sizing: border-box;
 }
+
 
 #page-wrap {
   padding-bottom: 10px;

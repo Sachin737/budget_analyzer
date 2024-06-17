@@ -42,12 +42,12 @@ const Summary = ({ mySummary, salary }) => {
   }, [mySummary, salary]);
 
   return (
-    <div className="flex flex-col md:flex-row justify-center items-center gap-4">
-      <div className="flex-grow md:w-[60%] bg-[#0F0F0F] rounded-lg p-4 shadow-md m-4 overflow-x-auto">
-        <h2 className="text-xl font-semibold text-[#EEEEEE] mb-4">
+    <div className="flex flex-col md:flex-row justify-center items-center">
+      <div className="h-[50vh] flex-grow lg:w-[60%] bg-[#0F0F0F] rounded-lg p-4 shadow-md overflow-x-auto">
+        <h2 className="text-xl text-center font-semibold text-[#EEEEEE] mb-4">
           Expense distribution
         </h2>
-        {data && <BarChart data={data} className="w-full p-4" />}
+        {data && <BarChart data={data} className=" w-full p-4" />}
       </div>
     </div>
   );
@@ -141,7 +141,7 @@ const MonthlySummary = ({
 
   return (
     <div className="flex flex-col md:flex-row justify-center items-center gap-4">
-      <div className="flex-grow md:w-[60%] bg-[#0F0F0F] rounded-lg p-4 shadow-md m-4 overflow-x-auto">
+      <div className="flex-grow lg:w-[60%] bg-[#0F0F0F] rounded-lg p-4 shadow-md m-4 overflow-x-auto">
         <div className="flex flex-row justify-between">
           <h2 className="text-xl font-semibold text-[#EEEEEE] mb-4">
             Expense {selectedYear}

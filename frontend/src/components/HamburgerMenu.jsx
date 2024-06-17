@@ -43,9 +43,9 @@ const SideNav = () => {
       {/* Sidenav */}
       <nav id="sidenav-1" className="sidenav fixed top-0 left-0 h-full">
         <button id="close-btn" className="btn btn-danger absolute top-4 right-4">
-          <img src="/images/close1.png" width={32} alt="" />
+          <img src="/images/close2.png" width={32} alt="" />
         </button>
-        <ul className="sidenav-menu text-[#dedeff] mt-16 ml-10">
+        <ul className="sidenav-menu text-[#3c6d79] mt-16 ml-10">
           <li className="sidenav-item">
             <ul className="sidenav-collapse flex flex-col gap-4">
               <li className="sidenav-item">
@@ -74,7 +74,7 @@ const SideNav = () => {
           marginRight: "12px",
         }}
       >
-        <img src="/images/ham1.png" id="open-btn" width={32} />
+        <img src="/images/ham.png" id="open-btn" width={32} />
       </button>
       {/* Toggler */}
     </>
